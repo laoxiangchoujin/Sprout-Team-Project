@@ -5,23 +5,33 @@ using UnityEngine;
 
 public class 基础棋盘 : MonoBehaviour
 {
-	public float 单位长度;
     public int 棋盘横向数量;
     public float 棋盘长宽比;
 
-    //int 棋盘纵向数量 = 棋盘横向数量 * 棋盘长宽比;
+	private int 棋盘纵向数量;// = (int)(棋盘横向数量 * 棋盘长宽比);
+	private GameObject[,] allSlots;// = new GameObject[棋盘横向数量, 棋盘纵向数量];
 
-    private Transform trans_plane;
+	private Transform trans_plane;
 
     public GameObject 棋盘插槽;
+	private Transform slotsParentTransform;
+
+	private bool bHasChanged = false;
+	private float changeIntervalTime = 0;//怎么说也1秒变一回，别太快
+	private bool bJustChanged=false;//是看是不是刚刚改变了inspector的值，不要改了值以后立马变，会卡
 
 	// Start is called before the first frame update
 	void Start()
     {
         trans_plane=GameObject.Find("棋盘").transform;
-        updatePlane();
+        updatePlane();		
 
-		initAllSlots();
+		GameObject slotsParent = new GameObject("slotsParent");
+		slotsParentTransform=slotsParent.transform;
+
+		//slotsParent.transform.SetParent(trans_plane,true);
+
+		initAllSlots();//需要先创建父物体，在生成插槽，否则先生成的插槽没有父级
 	}
 
     // Update is called once per frame
@@ -29,12 +39,31 @@ public class 基础棋盘 : MonoBehaviour
     {
         updatePlane();
         drawAxis();
+
+		changeIntervalTime += Time.deltaTime;
+		if (changeIntervalTime > 3)
+		{
+			bJustChanged = false;
+		}
+		if (bHasChanged && !bJustChanged)
+		{
+			clearAllSlots();
+			Debug.Log("清除并且重置了");
+			initAllSlots();
+			bHasChanged = false;
+		}
+		//Debug.Log(changeIntervalTime);
+		//Debug.Log(bJustChanged);
+		//if (Input.GetKey(KeyCode.E))
+		//{
+		//	clearAllSlots();
+		//}
     }
 
     void updatePlane()
     {
-        trans_plane.localScale=new Vector3(单位长度*棋盘横向数量*0.1f,1*0.1f,单位长度*棋盘横向数量*棋盘长宽比*0.1f);
-        trans_plane.position=new Vector3(单位长度 * 棋盘横向数量*0.5f , 0, 单位长度 * 棋盘横向数量 * 棋盘长宽比*0.5f);
+        trans_plane.localScale=new Vector3(棋盘横向数量*0.1f,1*0.1f,棋盘横向数量*棋盘长宽比*0.1f);
+        trans_plane.position=new Vector3( 棋盘横向数量*0.5f , 0,  棋盘横向数量 * 棋盘长宽比*0.5f);
     }
     void drawAxis()
     {      
@@ -46,10 +75,6 @@ public class 基础棋盘 : MonoBehaviour
 	}
     void initAllSlots()
     {
-		int 棋盘纵向数量 = (int)(棋盘横向数量 * 棋盘长宽比);
-		//GameObject allSlots[10][10] = null;
-		GameObject[,] allSlots = new GameObject[棋盘横向数量, 棋盘纵向数量];
-
 		for (int i = 0; i < 棋盘横向数量; i++)
 		{
 			for (int j = 0; j < 棋盘纵向数量; j++)
@@ -57,7 +82,28 @@ public class 基础棋盘 : MonoBehaviour
 				Vector3 pos = new Vector3(0.5f + i, 0.07f, 0.5f + j);
 				Vector3 rot = new Vector3(0, 0, 0);
 				Quaternion rot2 = Quaternion.Euler(rot);//vec3的欧拉角转为quaternion的四元数
-				allSlots[i, j] = GameObject.Instantiate(棋盘插槽, pos, rot2) as GameObject;
+				allSlots[i, j] = GameObject.Instantiate(棋盘插槽, pos, rot2,slotsParentTransform) as GameObject;//在生成时直接指定父物体
+				
+			}
+		}
+	}
+	private void OnValidate()//开始或inspector面板中的值改变时调用此函数
+	{
+		棋盘纵向数量 = (int)(棋盘横向数量 * 棋盘长宽比);
+		allSlots = new GameObject[棋盘横向数量, 棋盘纵向数量];
+
+		bHasChanged = true;
+		changeIntervalTime = 0;
+		bJustChanged = true;
+	}
+
+	void clearAllSlots()
+	{
+		if (allSlots != null)
+		{
+			foreach(Transform children in slotsParentTransform)
+			{
+				Destroy(children.gameObject);
 			}
 		}
 	}
