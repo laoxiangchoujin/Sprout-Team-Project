@@ -1,0 +1,4 @@
+repository "萌芽小队项目@tj_laoxiangchoujin@cloud.cn"
+  path "/"
+    br "/main"
+    co "/main"
