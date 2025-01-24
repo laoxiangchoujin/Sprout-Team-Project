@@ -9,6 +9,11 @@ public class 骰子的设定和控制 : MonoBehaviour
 
 	public int slotPosX;
 	public int slotPosY;
+	//另外得知道棋盘有几行几列
+	public GameObject 棋盘;
+	private int 棋盘横向数量;
+	private int 棋盘纵向数量;
+
 
 	private bool bNowMoving = false;
 	private float moveIntervalTime = 0;//骰子位移操作的间隔时间
@@ -42,10 +47,13 @@ public class 骰子的设定和控制 : MonoBehaviour
 		showOtherAspects();
 
 		slotsParentTransform= GameObject.Find("slotsParent").transform;//!!!注意!!!这行代码得在棋盘生成插槽之后才能调用，所以调整延后一下本脚本的执行顺序
-		//diceTransform.transform.SetParent(trans_plane,true);
+																	   //diceTransform.transform.SetParent(trans_plane,true);
 
-		diceTransform.position = new Vector3(slotsParentTransform.GetChild(Random.Range(0,slotsParentTransform.childCount)).position.x,0.5f,
-			slotsParentTransform.GetChild(Random.Range(0, slotsParentTransform.childCount)).position.z);
+		棋盘横向数量 = 棋盘.GetComponent<基础棋盘>().棋盘横向数量;
+		棋盘纵向数量 = (int)(棋盘.GetComponent<基础棋盘>().棋盘横向数量* 棋盘.GetComponent<基础棋盘>().棋盘长宽比);
+
+		diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX-1+(slotPosY-1)*棋盘横向数量).position.x,0.5f,
+			slotsParentTransform.GetChild(slotPosX-1+(slotPosY-1)*棋盘横向数量).position.z);
 	}
 
     // Update is called once per frame
@@ -120,37 +128,55 @@ public class 骰子的设定和控制 : MonoBehaviour
 	}
 	void diceMove()
 	{
-		if (Input.GetKey(KeyCode.W))
+		if (slotPosX >=1 && slotPosY >=1 && slotPosX <= 棋盘横向数量 && slotPosY <= 棋盘纵向数量)
 		{
-			diceTransform.position += new Vector3(0, 0, 1);
-			nowUpAspect=nowUpAspect.up;
-			showOtherAspects();
-			bJustMoved = true;
-			moveIntervalTime = 0;
+			if (Input.GetKey(KeyCode.W) && slotPosY < 棋盘纵向数量)
+			{
+				slotPosY += 1;
+				diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
+				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
+				nowUpAspect = nowUpAspect.up;
+				showOtherAspects();
+				bJustMoved = true;
+				moveIntervalTime = 0;
+			}
+			else if (Input.GetKey(KeyCode.S) && slotPosY > 1)
+			{
+				slotPosY -= 1;
+				diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
+				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
+				nowUpAspect = nowUpAspect.up;
+				showOtherAspects();
+				bJustMoved = true;
+				moveIntervalTime = 0;
+			}
+			else if (Input.GetKey(KeyCode.A) && slotPosX > 1)
+			{
+				slotPosX -= 1;
+				diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
+				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
+				nowUpAspect = nowUpAspect.up;
+				showOtherAspects();
+				bJustMoved = true;
+				moveIntervalTime = 0;
+			}
+			else if (Input.GetKey(KeyCode.D) && slotPosX < 棋盘横向数量)
+			{
+				slotPosX += 1;
+				diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
+				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
+				nowUpAspect = nowUpAspect.up;
+				showOtherAspects();
+				bJustMoved = true;
+				moveIntervalTime = 0;
+			}
 		}
-		else if (Input.GetKey(KeyCode.S))
-		{
-			diceTransform.position += new Vector3(0, 0, -1);
-			nowUpAspect = nowUpAspect.up;
-			showOtherAspects();
-			bJustMoved = true;
-			moveIntervalTime = 0;
-		}
-		else if (Input.GetKey(KeyCode.A))
-		{
-			diceTransform.position += new Vector3(-1, 0, 0);
-			nowUpAspect = nowUpAspect.up;
-			showOtherAspects();
-			bJustMoved = true;
-			moveIntervalTime = 0;
-		}
-		else if (Input.GetKey(KeyCode.D))
-		{
-			diceTransform.position += new Vector3(1, 0, 0);
-			nowUpAspect = nowUpAspect.up;
-			showOtherAspects();
-			bJustMoved = true;
-			moveIntervalTime = 0;
-		}
+		Debug.Log("现在的slotposx和slotposy分别是：" + slotPosX + slotPosY);
+	}
+	private void OnValidate()
+	{
+		if(Time.time>1f)//不要一开始就运行，这样会找不到slotsParentTransform
+			diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
+			slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
 	}
 }

@@ -75,9 +75,10 @@ public class 基础棋盘 : MonoBehaviour
 	}
     void initAllSlots()
     {
-		for (int i = 0; i < 棋盘横向数量; i++)
+		
+		for (int j = 0; j < 棋盘纵向数量; j++)
 		{
-			for (int j = 0; j < 棋盘纵向数量; j++)
+			for (int i = 0; i < 棋盘横向数量; i++)
 			{
 				Vector3 pos = new Vector3(0.5f + i, 0.07f, 0.5f + j);
 				Vector3 rot = new Vector3(0, 0, 0);
