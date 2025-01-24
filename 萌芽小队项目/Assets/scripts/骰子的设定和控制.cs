@@ -32,7 +32,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 	};
 
     //aspect aspect1 = new aspect();
-    private aspect[] sixAspects =new aspect[6];
+    private aspect[] sixAspects =new aspect[7];
 
 	private aspect nowUpAspect;
 
@@ -44,7 +44,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 	void Start()
     {
         initDice();
-		nowUpAspect=sixAspects[4];//暂时先让5的那面在上边
+		nowUpAspect=sixAspects[5];//暂时先让5的那面在上边
 
 		diceTransform=GameObject.Find("骰子").transform;
 
@@ -81,51 +81,51 @@ public class 骰子的设定和控制 : MonoBehaviour
     }
     void initDice()
     {
-		for (int i = 0; i < 6; i++) //上边只是给数组实例化了，还得给数组中的每个元素实例化
+		for (int i = 1; i <= 6; i++) //上边只是给数组实例化了，还得给数组中的每个元素实例化
 		{
 			sixAspects[i] = new aspect();
 		}
 
-		sixAspects[0].num = 1;
-		sixAspects[0].up = sixAspects[4];
-		sixAspects[0].down = sixAspects[2];
-		sixAspects[0].left = sixAspects[3];
-		sixAspects[0].right = sixAspects[5];
-
-		sixAspects[1].num = 2;
+		sixAspects[1].num = 1;
 		sixAspects[1].up = sixAspects[5];
-		sixAspects[1].down = sixAspects[0];
+		sixAspects[1].down = sixAspects[2];
 		sixAspects[1].left = sixAspects[4];
-		sixAspects[1].right = sixAspects[2];
+		sixAspects[1].right = sixAspects[3];
 
-		sixAspects[2].num = 3;
-		sixAspects[2].up = sixAspects[5];
-		sixAspects[2].down = sixAspects[0];
-		sixAspects[2].left = sixAspects[1];
+		sixAspects[2].num = 2;
+		sixAspects[2].up = sixAspects[1];
+		sixAspects[2].down = sixAspects[6];
+		sixAspects[2].left = sixAspects[4];
 		sixAspects[2].right = sixAspects[3];
 
-		sixAspects[3].num = 4;
-		sixAspects[3].up = sixAspects[0];
-		sixAspects[3].down = sixAspects[5];
-		sixAspects[3].left = sixAspects[1];
-		sixAspects[3].right = sixAspects[3];
+		sixAspects[3].num = 3;
+		sixAspects[3].up = sixAspects[6];
+		sixAspects[3].down = sixAspects[1];
+		sixAspects[3].left = sixAspects[5];
+		sixAspects[3].right = sixAspects[2];
 
-		sixAspects[4].num = 5;
-		sixAspects[4].up = sixAspects[5];//上边是6的边
-		sixAspects[4].down = sixAspects[0];
-		sixAspects[4].left = sixAspects[3];
-		sixAspects[4].right = sixAspects[2];
+		sixAspects[4].num = 4;
+		sixAspects[4].up = sixAspects[6];
+		sixAspects[4].down = sixAspects[1];
+		sixAspects[4].left = sixAspects[2];
+		sixAspects[4].right = sixAspects[5];
 
-		sixAspects[5].num = 6;
-		sixAspects[5].up = sixAspects[2];
-		sixAspects[5].down = sixAspects[5];
-		sixAspects[5].left = sixAspects[3];
-		sixAspects[5].right = sixAspects[0];
+		sixAspects[5].num = 5;
+		sixAspects[5].up = sixAspects[6];//上边是6的边
+		sixAspects[5].down = sixAspects[1];
+		sixAspects[5].left = sixAspects[4];
+		sixAspects[5].right = sixAspects[3];
+
+		sixAspects[6].num = 6;
+		sixAspects[6].up = sixAspects[2];
+		sixAspects[6].down = sixAspects[5];
+		sixAspects[6].left = sixAspects[4];
+		sixAspects[6].right = sixAspects[3];
 	}
 
 	void showOtherAspects()
 	{
-		if(debugLog)
+		//if(debugLog)
 		Debug.Log("现在朝上的面为："+nowUpAspect.num+'\n'
 			+"上边的面为"+nowUpAspect.up.num + "下边的面为" + nowUpAspect.down.num 
 			+ "左边的面为" + nowUpAspect.left.num  + "右边的面为" + nowUpAspect.right.num );
@@ -140,8 +140,13 @@ public class 骰子的设定和控制 : MonoBehaviour
 				slotPosY += 1;
 				diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
 				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
-				nowUpAspect = nowUpAspect.down;
-				showOtherAspects();
+
+                int Num = nowUpAspect.down.num;
+                nowUpAspect.up.num = nowUpAspect.num;
+                nowUpAspect.down.num = 7 - nowUpAspect.num;
+                nowUpAspect.num = Num;
+                showOtherAspects();
+
 				bJustMoved = true;
 				moveIntervalTime = 0;
 				if (debugLog)
@@ -152,8 +157,13 @@ public class 骰子的设定和控制 : MonoBehaviour
 				slotPosY -= 1;
 				diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
 				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
-				nowUpAspect = nowUpAspect.up;
-				showOtherAspects();
+
+                int Num = nowUpAspect.up.num;
+                nowUpAspect.up.num = 7 - nowUpAspect.num;
+                nowUpAspect.down.num = nowUpAspect.num;
+                nowUpAspect.num = Num;
+                showOtherAspects();
+
 				bJustMoved = true;
 				moveIntervalTime = 0;
 				if (debugLog)
@@ -164,8 +174,13 @@ public class 骰子的设定和控制 : MonoBehaviour
 				slotPosX -= 1;
 				diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
 				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
-				nowUpAspect = nowUpAspect.right;
-				showOtherAspects();
+
+                int Num = nowUpAspect.right.num;
+                nowUpAspect.left.num = nowUpAspect.num;
+                nowUpAspect.right.num = 7 - nowUpAspect.num;
+                nowUpAspect.num = Num;
+                showOtherAspects();
+
 				bJustMoved = true;
 				moveIntervalTime = 0;
 				if (debugLog)
@@ -176,8 +191,13 @@ public class 骰子的设定和控制 : MonoBehaviour
 				slotPosX += 1;
 				diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
 				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
-				nowUpAspect = nowUpAspect.left;
+
+                int Num = nowUpAspect.left.num;
+                nowUpAspect.left.num = 7 - nowUpAspect.num;
+                nowUpAspect.right.num = nowUpAspect.num;
+				nowUpAspect.num = Num;
 				showOtherAspects();
+
 				bJustMoved = true;
 				moveIntervalTime = 0;
 				if (debugLog)
