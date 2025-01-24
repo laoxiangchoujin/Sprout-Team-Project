@@ -18,7 +18,7 @@ public class 敌人控制 : MonoBehaviour
 
 	private bool bNowMoving = false;
 	private float moveIntervalTime = 0;//骰子位移操作的间隔时间
-	private bool bJustMoved = false;
+	public bool bJustMoved = false;
 
 	private Transform enemyTransform;//=GameObject.Find("骰子").transform;
 	private Transform slotsParentTransform;//=GameObject.Find("棋盘").transform;
@@ -26,6 +26,8 @@ public class 敌人控制 : MonoBehaviour
 	public GameObject 骰子;
 	private int dicePosX;
 	private int dicePosY;
+
+	public bool bRoundEnemyCanMove;
 
 	// Start is called before the first frame update
 	void Start()
@@ -59,7 +61,7 @@ public class 敌人控制 : MonoBehaviour
 		{
 			bJustMoved = false;
 		}
-		if (bNowMoving && !bJustMoved)
+		if (bNowMoving && !bJustMoved&&bRoundEnemyCanMove)
 		{
 			//执行移动的代码
 			enemyMove();
@@ -117,7 +119,8 @@ public class 敌人控制 : MonoBehaviour
 	}
 	private void OnValidate()
 	{
-		if (Time.time > 1f)//不要一开始就运行，这样会找不到slotsParentTransform
+		if(UnityEditor.EditorApplication.isPlaying)//只有在播放模式才做这个操作，要不然也会空引用
+			if (Time.time > 1f)//不要一开始就运行，这样会找不到slotsParentTransform
 			enemyTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
 			slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
 	}

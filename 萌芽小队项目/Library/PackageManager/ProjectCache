@@ -13,14 +13,14 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638731913023336667
-    m_Hash: 2658021238
+      ticks: 638733031840573454
+    m_Hash: 258582031
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
   m_LocalFileStatus: []
 m_ProjectPath: "D:/Unity/Unity_Projects/Sprout Team/\u840C\u82BD\u5C0F\u961F\u9879\u76EE/Packages"
-m_EditorVersion: 2022.3.20f1c1 (82a5dab7aa2a)
+m_EditorVersion: 2022.3.17f1c1 (a01dafa986ec)
 m_ResolvedPackages:
 - packageId: com.unity.collab-proxy@2.6.0
   testable: 0
@@ -237,7 +237,7 @@ m_ResolvedPackages:
   - name: com.unity.performance.profile-analyzer
     version: 1.2.2
   - name: com.unity.testtools.codecoverage
-    version: 1.2.5
+    version: 1.2.4
   - name: com.unity.settings-manager
     version: 2.0.1
   keywords: []
@@ -3248,12 +3248,12 @@ m_ResolvedPackages:
     deprecationMessage: 
   isDeprecated: 0
   deprecationMessage: 
-- packageId: com.unity.testtools.codecoverage@1.2.5
+- packageId: com.unity.testtools.codecoverage@1.2.4
   testable: 0
   isDirectDependency: 0
-  version: 1.2.5
+  version: 1.2.4
   source: 1
-  resolvedPath: "D:\\Unity\\Unity_Projects\\Sprout Team\\\u840C\u82BD\u5C0F\u961F\u9879\u76EE\\Library\\PackageCache\\com.unity.testtools.codecoverage@1.2.5"
+  resolvedPath: "D:\\Unity\\Unity_Projects\\Sprout Team\\\u840C\u82BD\u5C0F\u961F\u9879\u76EE\\Library\\PackageCache\\com.unity.testtools.codecoverage@1.2.4"
   assetPath: Packages/com.unity.testtools.codecoverage
   name: com.unity.testtools.codecoverage
   displayName: Code Coverage
@@ -3304,6 +3304,7 @@ m_ResolvedPackages:
     - 1.2.5
     - 1.2.6
     compatible:
+    - 1.2.4
     - 1.2.5
     - 1.2.6
     recommended: 1.2.6
@@ -3339,16 +3340,16 @@ m_ResolvedPackages:
     configSource: 0
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 638386640140000000
+  datePublishedTicks: 638212235100000000
   documentationUrl: https://docs.unity3d.com/Packages/com.unity.testtools.codecoverage@1.2/manual/index.html
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/com.unity.testtools.codecoverage.git
-    revision: afeb9febf6597fcc31c99ca116d6a82b1e97b9f5
+    revision: a7dd0751db55cd55e3b336723fb51433c1de7244
     path: 
   unityLifecycle:
-    version: 1.2.5
+    version: 1.2.4
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0

@@ -17,7 +17,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 
 	private bool bNowMoving = false;
 	private float moveIntervalTime = 0;//骰子位移操作的间隔时间
-	private bool bJustMoved = false;
+	public bool bJustMoved = false;
 
 	private Transform diceTransform;//=GameObject.Find("骰子").transform;
 	private Transform slotsParentTransform;//=GameObject.Find("棋盘").transform;
@@ -36,8 +36,12 @@ public class 骰子的设定和控制 : MonoBehaviour
 
 	private aspect nowUpAspect;
 
-    // Start is called before the first frame update
-    void Start()
+	public bool bRoundPlayerCanMove;
+
+	public bool debugLog = false;
+
+	// Start is called before the first frame update
+	void Start()
     {
         initDice();
 		nowUpAspect=sixAspects[4];//暂时先让5的那面在上边
@@ -68,7 +72,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 		{
 			bJustMoved = false;
 		}
-		if (bNowMoving && !bJustMoved)
+		if (bNowMoving && !bJustMoved&&bRoundPlayerCanMove)
 		{
 			//执行移动的代码
 			diceMove();
@@ -121,6 +125,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 
 	void showOtherAspects()
 	{
+		if(debugLog)
 		Debug.Log("现在朝上的面为："+nowUpAspect.num+'\n'
 			+"上边的面为"+nowUpAspect.up.num + "下边的面为" + nowUpAspect.down.num 
 			+ "左边的面为" + nowUpAspect.left.num  + "右边的面为" + nowUpAspect.right.num );
@@ -139,7 +144,8 @@ public class 骰子的设定和控制 : MonoBehaviour
 				showOtherAspects();
 				bJustMoved = true;
 				moveIntervalTime = 0;
-				Debug.Log("现在的slotposx和slotposy分别是：" + slotPosX + ',' + slotPosY);
+				if (debugLog)
+					Debug.Log("现在的slotposx和slotposy分别是：" + slotPosX + ',' + slotPosY);
 			}
 			else if (Input.GetKey(KeyCode.S) && slotPosY > 1)
 			{
@@ -150,7 +156,8 @@ public class 骰子的设定和控制 : MonoBehaviour
 				showOtherAspects();
 				bJustMoved = true;
 				moveIntervalTime = 0;
-				Debug.Log("现在的slotposx和slotposy分别是：" + slotPosX + ',' + slotPosY);
+				if (debugLog)
+					Debug.Log("现在的slotposx和slotposy分别是：" + slotPosX + ',' + slotPosY);
 			}
 			else if (Input.GetKey(KeyCode.A) && slotPosX > 1)
 			{
@@ -161,7 +168,8 @@ public class 骰子的设定和控制 : MonoBehaviour
 				showOtherAspects();
 				bJustMoved = true;
 				moveIntervalTime = 0;
-				Debug.Log("现在的slotposx和slotposy分别是：" + slotPosX + ',' + slotPosY);
+				if (debugLog)
+					Debug.Log("现在的slotposx和slotposy分别是：" + slotPosX + ',' + slotPosY);
 			}
 			else if (Input.GetKey(KeyCode.D) && slotPosX < 棋盘横向数量)
 			{
@@ -172,14 +180,16 @@ public class 骰子的设定和控制 : MonoBehaviour
 				showOtherAspects();
 				bJustMoved = true;
 				moveIntervalTime = 0;
-				Debug.Log("现在的slotposx和slotposy分别是：" + slotPosX + ',' + slotPosY);
+				if (debugLog)
+					Debug.Log("现在的slotposx和slotposy分别是：" + slotPosX + ',' + slotPosY);
 			}
 		}
 		
 	}
 	private void OnValidate()
 	{
-		if(Time.time>1f)//不要一开始就运行，这样会找不到slotsParentTransform
+		if (UnityEditor.EditorApplication.isPlaying)//只有在播放模式才做这个操作，要不然也会空引用
+			if (Time.time>1f)//不要一开始就运行，这样会找不到slotsParentTransform
 			diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
 			slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
 	}
