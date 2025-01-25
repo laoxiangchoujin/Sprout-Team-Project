@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class 敌人控制 : MonoBehaviour
 {
-	private int hp;
-	private int atk;
+	public int hp;
+	public int atk;
 
 	public int slotPosX;
 	public int slotPosY;
@@ -45,6 +45,8 @@ public class 敌人控制 : MonoBehaviour
 
 		dicePosX = 骰子.GetComponent<骰子的设定和控制>().slotPosX;
 		dicePosY = 骰子.GetComponent<骰子的设定和控制>().slotPosY;
+
+		atk = hp;
 	}
 
 	// Update is called once per frame

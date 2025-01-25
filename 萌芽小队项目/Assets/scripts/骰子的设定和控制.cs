@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class 骰子的设定和控制 : MonoBehaviour
 {
-	private int hp;
-	private int atk;
+	public int hp;
+	public int atk;
 
 	public int slotPosX;
 	public int slotPosY;
@@ -40,6 +41,8 @@ public class 骰子的设定和控制 : MonoBehaviour
 
 	public bool debugLog = false;
 
+	private GameObject[] enemy;
+
 	// Start is called before the first frame update
 	void Start()
     {
@@ -58,6 +61,11 @@ public class 骰子的设定和控制 : MonoBehaviour
 
 		diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX-1+(slotPosY-1)*棋盘横向数量).position.x,0.5f,
 			slotsParentTransform.GetChild(slotPosX-1+(slotPosY-1)*棋盘横向数量).position.z);
+
+		hp = nowUpAspect.num;
+		atk = hp;
+
+		enemy = GameObject.FindGameObjectsWithTag("Enemy");
 	}
 
     // Update is called once per frame
@@ -76,7 +84,9 @@ public class 骰子的设定和控制 : MonoBehaviour
 		{
 			//执行移动的代码
 			diceMove();
-			
+
+			hp = nowUpAspect.num;
+			atk = hp;
 		}
     }
     void initDice()
@@ -125,7 +135,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 
 	void showOtherAspects()
 	{
-		//if(debugLog)
+		if(debugLog)
 		Debug.Log("现在朝上的面为："+nowUpAspect.num+'\n'
 			+"上边的面为"+nowUpAspect.up.num + "下边的面为" + nowUpAspect.down.num 
 			+ "左边的面为" + nowUpAspect.left.num  + "右边的面为" + nowUpAspect.right.num );
@@ -212,5 +222,28 @@ public class 骰子的设定和控制 : MonoBehaviour
 			if (Time.time>1f)//不要一开始就运行，这样会找不到slotsParentTransform
 			diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
 			slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
+	}
+
+	private void OnCollisionEnter(Collision collision)//事实上，我更想在敌人控制的脚本写这个函数
+	{
+		if (collision == null) return;
+
+		var enemy= collision.gameObject.GetComponent<敌人控制>();
+		if (enemy == null) return;
+
+		if (this.atk > enemy.hp)//战斗胜利的情况
+		{
+			Debug.Log("destroy了一个目标");
+			Destroy(enemy.gameObject);
+		}
+		else if (this.hp < enemy.atk)//战斗失败的情况
+		{
+			Debug.Log("你已被击败");
+			//Destroy(this.gameObject);//就不要销毁了，省的报错
+			GameObject 回合计数器 = GameObject.Find("回合计数器");
+			回合计数器.GetComponent<回合计数器>().玩家失败 = true;
+		}
+
+		
 	}
 }

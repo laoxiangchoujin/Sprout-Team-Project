@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: 563121579}
   - component: {fileID: 563121578}
   - component: {fileID: 563121577}
+  - component: {fileID: 563121582}
   m_Layer: 0
   m_Name: "\u654C\u4EBA"
   m_TagString: Enemy
@@ -277,6 +278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d49e463af3fe2f49aae973beca1d081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
+  atk: 0
   slotPosX: 9
   slotPosY: 9
   "\u68CB\u76D8": {fileID: 50955333}
@@ -371,6 +374,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &563121582
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563121576}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,6 +544,8 @@ MonoBehaviour:
   bRoundPlayerMoved: 0
   bRoundEnemyMoveCount: 0
   "\u654C\u4EBA\u79FB\u52A8\u7684\u65F6\u95F4\u95F4\u9694": 0.3
+  debuglog: 0
+  "\u73A9\u5BB6\u5931\u8D25": 0
 --- !u!1 &719992270
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,6 +559,7 @@ GameObject:
   - component: {fileID: 719992273}
   - component: {fileID: 719992272}
   - component: {fileID: 719992271}
+  - component: {fileID: 719992276}
   m_Layer: 0
   m_Name: "\u654C\u4EBA (1)"
   m_TagString: Enemy
@@ -546,6 +579,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d49e463af3fe2f49aae973beca1d081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
+  atk: 0
   slotPosX: 3
   slotPosY: 9
   "\u68CB\u76D8": {fileID: 50955333}
@@ -640,6 +675,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &719992276
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719992270}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &914754896
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,6 +715,7 @@ GameObject:
   - component: {fileID: 914754899}
   - component: {fileID: 914754898}
   - component: {fileID: 914754897}
+  - component: {fileID: 914754902}
   m_Layer: 0
   m_Name: "\u654C\u4EBA (2)"
   m_TagString: Enemy
@@ -672,6 +735,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d49e463af3fe2f49aae973beca1d081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
+  atk: 0
   slotPosX: 16
   slotPosY: 9
   "\u68CB\u76D8": {fileID: 50955333}
@@ -766,6 +831,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &914754902
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914754896}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,6 +963,7 @@ GameObject:
   - component: {fileID: 1038645863}
   - component: {fileID: 1038645862}
   - component: {fileID: 1038645861}
+  - component: {fileID: 1038645866}
   m_Layer: 0
   m_Name: "\u9AB0\u5B50"
   m_TagString: Player
@@ -890,6 +983,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a502d62dd4ed44296e47b8cfebea3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
+  atk: 0
   slotPosX: 1
   slotPosY: 5
   "\u68CB\u76D8": {fileID: 50955333}
@@ -982,6 +1077,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1038645866
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038645860}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
