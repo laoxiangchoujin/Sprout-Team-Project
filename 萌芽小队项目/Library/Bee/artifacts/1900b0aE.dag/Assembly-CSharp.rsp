@@ -354,6 +354,10 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -analyzer:"D:/Unity/Unity_Editor/2022.3.17f1c1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"D:/Unity/Unity_Editor/2022.3.17f1c1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
+<<<<<<< Updated upstream
+=======
+"Assets/scripts/UI对应的函数.cs"
+>>>>>>> Stashed changes
 "Assets/scripts/回合计数器.cs"
 "Assets/scripts/基础棋盘.cs"
 "Assets/scripts/敌人控制.cs"
