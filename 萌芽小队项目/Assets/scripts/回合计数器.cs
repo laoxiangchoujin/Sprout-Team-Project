@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class 回合计数器 : MonoBehaviour
 {
@@ -26,6 +28,10 @@ public class 回合计数器 : MonoBehaviour
 
 	public bool 玩家失败 = false;
 
+	//下边是一些和UI相关的变量
+	private bool 回合暂停 = false;
+	public GameObject canvas1;//这个是战斗界面的canvas
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +55,11 @@ public class 回合计数器 : MonoBehaviour
 	{
 		while (true)
 		{
+			if (回合暂停)
+			{
+				yield return new WaitForSeconds(10000000);
+			}
+
 			player = GameObject.FindGameObjectWithTag("Player");
 			enemy = GameObject.FindGameObjectsWithTag("Enemy");//更新一下
 
@@ -56,6 +67,8 @@ public class 回合计数器 : MonoBehaviour
 			if (玩家失败)
 			{
 				player.GetComponent<骰子的设定和控制>().bRoundPlayerCanMove = false;
+
+				GameObject.Find("Canvas2/关卡结算界面/失败图片").GetComponent<Image>().enabled = true;
 				Debug.Log("玩家失败了");
 				break;
 			}
@@ -123,6 +136,7 @@ public class 回合计数器 : MonoBehaviour
 			}
 			else if (player != null && enemy != null && enemy.Length == 0)
 			{
+				GameObject.Find("Canvas2/关卡结算界面/胜利图片").GetComponent<Image>().enabled = true;
 				Debug.Log("敌人都被消灭，游戏胜利");
 				break;
 			}
@@ -134,6 +148,30 @@ public class 回合计数器 : MonoBehaviour
 		}
 	}
 
+	public void 暂停(bool bPause)
+	{
+		回合暂停 = bPause;
+	}
 
+	void 更新UI()
+	{
+		//从左1到左4，然后从右1到右4的顺序
+		var lui1 = GameObject.Find("Canvas1/左半/ui1/文本").GetComponent<TextMeshProUGUI>();
+		lui1.text = "回合：" + roundCount + '/' + "步数" + "?"
+			+ '\n' + "剩余敌人：" + enemy.Length
+			+ '\n' + "金币数目" + "?";
+
+		var lui3 = GameObject.Find("Canvas1/左半/ui3");
+		lui3.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text=player.GetComponent<骰子的设定和控制>().nowUpAspect.num.ToString();
+		lui3.transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = player.GetComponent<骰子的设定和控制>().nowUpAspect.up.num.ToString();
+		lui3.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = player.GetComponent<骰子的设定和控制>().nowUpAspect.down.num.ToString();
+		lui3.transform.GetChild(8).GetComponent<TextMeshProUGUI>().text = player.GetComponent<骰子的设定和控制>().nowUpAspect.left.num.ToString();
+		lui3.transform.GetChild(9).GetComponent<TextMeshProUGUI>().text = player.GetComponent<骰子的设定和控制>().nowUpAspect.right.num.ToString();
+	}
+
+	private void Update()
+	{
+		更新UI();
+	}
 
 }

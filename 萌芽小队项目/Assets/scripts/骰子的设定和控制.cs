@@ -23,7 +23,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 	private Transform diceTransform;//=GameObject.Find("骰子").transform;
 	private Transform slotsParentTransform;//=GameObject.Find("棋盘").transform;
 
-    class aspect
+    public class aspect
     {
         public int num;
 		public aspect up;//因为是class，所以这里的上下左右是引用，而不是直接的值传递
@@ -35,7 +35,7 @@ public class 骰子的设定和控制 : MonoBehaviour
     //aspect aspect1 = new aspect();
     private aspect[] sixAspects =new aspect[7];
 
-	private aspect nowUpAspect;
+	public aspect nowUpAspect;
 
 	public bool bRoundPlayerCanMove;
 
@@ -240,6 +240,10 @@ public class 骰子的设定和控制 : MonoBehaviour
 		{
 			Debug.Log("你已被击败");
 			//Destroy(this.gameObject);//就不要销毁了，省的报错
+
+			//不渲染了，说是要做动画
+			this.GetComponent<Renderer>().enabled = false;
+
 			GameObject 回合计数器 = GameObject.Find("回合计数器");
 			回合计数器.GetComponent<回合计数器>().玩家失败 = true;
 		}
