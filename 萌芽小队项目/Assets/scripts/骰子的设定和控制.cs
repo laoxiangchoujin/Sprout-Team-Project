@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class 骰子的设定和控制 : MonoBehaviour
 {
-	public int hp;
+    public bool canUp = true;
+    public bool canDown = true;
+    public bool canLeft = true;
+    public bool canRight = true;
+
+    public int hp;
 	public int atk;
 
 	public int slotPosX;
@@ -71,16 +76,16 @@ public class 骰子的设定和控制 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (Input.GetKeyUp(KeyCode.W)|| Input.GetKeyUp(KeyCode.A)|| Input.GetKeyUp(KeyCode.S)|| Input.GetKeyUp(KeyCode.D))
-		{ 
-			bNowMoving = true;
+        if ((Input.GetKeyUp(KeyCode.W) && canUp) || (Input.GetKeyUp(KeyCode.A) && canLeft) || (Input.GetKeyUp(KeyCode.S) && canDown) || (Input.GetKeyUp(KeyCode.D) && canRight))
+        {
+            bNowMoving = true;
 		}
 		moveIntervalTime += Time.deltaTime;
 		if (moveIntervalTime > 0.2)
 		{
 			bJustMoved = false;
 		}
-		if (bNowMoving && !bJustMoved&&bRoundPlayerCanMove)
+		if (bNowMoving && !bJustMoved && bRoundPlayerCanMove) 
 		{
 			//执行移动的代码
 			diceMove();
@@ -145,9 +150,14 @@ public class 骰子的设定和控制 : MonoBehaviour
 	{
 		if (slotPosX >=1 && slotPosY >=1 && slotPosX <= 棋盘横向数量 && slotPosY <= 棋盘纵向数量)
 		{
-			if (Input.GetKey(KeyCode.W) && slotPosY < 棋盘纵向数量)
+			if (Input.GetKey(KeyCode.W) && canUp && slotPosY < 棋盘纵向数量)
 			{
-				slotPosY += 1;
+                canUp = true;
+                canDown = false;
+                canLeft = true;
+                canRight = true;
+
+                slotPosY += 1;
 				diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
 				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
 
@@ -162,9 +172,14 @@ public class 骰子的设定和控制 : MonoBehaviour
 				if (debugLog)
 					Debug.Log("现在的slotposx和slotposy分别是：" + slotPosX + ',' + slotPosY);
 			}
-			else if (Input.GetKey(KeyCode.S) && slotPosY > 1)
+			else if (Input.GetKey(KeyCode.S) && canDown && slotPosY > 1)
 			{
-				slotPosY -= 1;
+                canUp = false;
+                canDown = true;
+                canLeft = true;
+                canRight = true;
+
+                slotPosY -= 1;
 				diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
 				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
 
@@ -179,9 +194,14 @@ public class 骰子的设定和控制 : MonoBehaviour
 				if (debugLog)
 					Debug.Log("现在的slotposx和slotposy分别是：" + slotPosX + ',' + slotPosY);
 			}
-			else if (Input.GetKey(KeyCode.A) && slotPosX > 1)
+			else if (Input.GetKey(KeyCode.A) && canLeft && slotPosX > 1)
 			{
-				slotPosX -= 1;
+                canUp = true;
+                canDown = true;
+                canLeft = true;
+                canRight = false;
+
+                slotPosX -= 1;
 				diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
 				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
 
@@ -196,9 +216,14 @@ public class 骰子的设定和控制 : MonoBehaviour
 				if (debugLog)
 					Debug.Log("现在的slotposx和slotposy分别是：" + slotPosX + ',' + slotPosY);
 			}
-			else if (Input.GetKey(KeyCode.D) && slotPosX < 棋盘横向数量)
+			else if (Input.GetKey(KeyCode.D) && canRight && slotPosX < 棋盘横向数量)
 			{
-				slotPosX += 1;
+                canUp = true;
+                canDown = true;
+                canLeft = false;
+                canRight = true;
+
+                slotPosX += 1;
 				diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
 				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
 

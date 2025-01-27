@@ -162,7 +162,7 @@ public class 回合计数器 : MonoBehaviour
 			+ '\n' + "金币数目" + "?";
 
 		var lui3 = GameObject.Find("Canvas1/左半/ui3");
-		lui3.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text=player.GetComponent<骰子的设定和控制>().nowUpAspect.num.ToString();
+		lui3.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = player.GetComponent<骰子的设定和控制>().nowUpAspect.num.ToString();
 		lui3.transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = player.GetComponent<骰子的设定和控制>().nowUpAspect.up.num.ToString();
 		lui3.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = player.GetComponent<骰子的设定和控制>().nowUpAspect.down.num.ToString();
 		lui3.transform.GetChild(8).GetComponent<TextMeshProUGUI>().text = player.GetComponent<骰子的设定和控制>().nowUpAspect.left.num.ToString();
