@@ -19299,11 +19299,7 @@
       "DisplayName": "Writing Assembly-CSharp.rsp",
       "ActionType": "WriteFile",
       "PayloadOffset": 1398549,
-<<<<<<< Updated upstream
-      "PayloadLength": 30913,
-=======
-      "PayloadLength": 30986,
->>>>>>> Stashed changes
+      "PayloadLength": 30952,
       "PayloadDebugContentSnippet": "-target:library\r\n-out:\"Library",
       "Inputs": [],
       "Outputs": [
@@ -19315,11 +19311,7 @@
       "Annotation": "WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.rsp2",
       "DisplayName": "Writing Assembly-CSharp.rsp2",
       "ActionType": "WriteFile",
-<<<<<<< Updated upstream
-      "PayloadOffset": 1429549,
-=======
-      "PayloadOffset": 1429622,
->>>>>>> Stashed changes
+      "PayloadOffset": 1429588,
       "PayloadLength": 0,
       "PayloadDebugContentSnippet": "",
       "Inputs": [],
@@ -19806,11 +19798,7 @@
       "Annotation": "WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll.mvfrm.rsp",
       "DisplayName": "Writing Assembly-CSharp.dll.mvfrm.rsp",
       "ActionType": "WriteFile",
-<<<<<<< Updated upstream
-      "PayloadOffset": 1429645,
-=======
-      "PayloadOffset": 1429718,
->>>>>>> Stashed changes
+      "PayloadOffset": 1429684,
       "PayloadLength": 9366,
       "PayloadDebugContentSnippet": "Library\\Bee\\artifacts\\mvdfrm\\U",
       "Inputs": [],
