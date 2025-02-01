@@ -6,17 +6,23 @@ public class UI对应的函数 : MonoBehaviour
 {
     public GameObject 回合计数器;
 
-    // Start is called before the first frame update
-    void Start()
+    public void OnMouseEnter(GameObject ui)
     {
-        
+        ui.transform.localScale = ui.transform.localScale / 0.9f;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnMouseExit(GameObject ui)
     {
-        
+        ui.transform.localScale = ui.transform.localScale * 0.9f;
     }
 
-    
+    public void StartGame()
+    {
+        //点击后跳转至关卡地图选择界面
+    }
+
+    public void ExitGame()
+    {
+        UnityEditor.EditorApplication.isPlaying = false;
+    }
 }
