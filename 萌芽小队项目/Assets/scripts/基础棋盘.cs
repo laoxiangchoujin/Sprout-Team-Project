@@ -29,36 +29,36 @@ public class 基础棋盘 : MonoBehaviour
 		GameObject slotsParent = new GameObject("slotsParent");
 		slotsParentTransform=slotsParent.transform;
 
-		//slotsParent.transform.SetParent(trans_plane,true);
+		//slotsParent.transform.SetParent(trans_plane,true);;
 
 		initAllSlots();//需要先创建父物体，在生成插槽，否则先生成的插槽没有父级
 	}
 
     // Update is called once per frame
-    void Update()
-    {
-        updatePlane();
-        drawAxis();
+  //  void Update()
+  //  {
+  //      updatePlane();
+  //      drawAxis();
 
-		changeIntervalTime += Time.deltaTime;
-		if (changeIntervalTime > 3)
-		{
-			bJustChanged = false;
-		}
-		if (bHasChanged && !bJustChanged)
-		{
-			clearAllSlots();
-			Debug.Log("清除并且重置了");
-			initAllSlots();
-			bHasChanged = false;
-		}
-		//Debug.Log(changeIntervalTime);
-		//Debug.Log(bJustChanged);
-		//if (Input.GetKey(KeyCode.E))
+		//changeIntervalTime += Time.deltaTime;
+		//if (changeIntervalTime > 3)
+		//{
+		//	bJustChanged = false;
+		//}
+		//if (bHasChanged && !bJustChanged)
 		//{
 		//	clearAllSlots();
+		//	Debug.Log("清除并且重置了");
+		//	initAllSlots();
+		//	bHasChanged = false;
 		//}
-    }
+		////Debug.Log(changeIntervalTime);
+		////Debug.Log(bJustChanged);
+		////if (Input.GetKey(KeyCode.E))
+		////{
+		////	clearAllSlots();
+		////}
+  //  }
 
     void updatePlane()
     {
@@ -84,7 +84,7 @@ public class 基础棋盘 : MonoBehaviour
 				Vector3 rot = new Vector3(0, 0, 0);
 				Quaternion rot2 = Quaternion.Euler(rot);//vec3的欧拉角转为quaternion的四元数
 				allSlots[i, j] = GameObject.Instantiate(棋盘插槽, pos, rot2,slotsParentTransform) as GameObject;//在生成时直接指定父物体
-				
+				allSlots[i, j].name = (i + 1).ToString() + ',' + (j + 1).ToString();
 			}
 		}
 	}

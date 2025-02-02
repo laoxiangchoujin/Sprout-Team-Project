@@ -21,7 +21,8 @@ public class 障碍物设定 : MonoBehaviour
     {
         obstacleTransform = this.transform;
         StartCoroutine(延时());
-    }
+		//slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).tag = "Obstacle";
+	}
 
     IEnumerator 延时()
     {
@@ -34,18 +35,25 @@ public class 障碍物设定 : MonoBehaviour
 
         obstacleTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
             slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
-    }
+
+		slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).name = "Obstacle"+ slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).name;
+	}
 
     void Update()
     {
-        
-    }
+		//if(Time.time>0.01f)
+	}
 
     private void OnValidate()
     {
         if (UnityEditor.EditorApplication.isPlaying)//只有在播放模式才做这个操作，要不然也会空引用
-            if (Time.time > 1f)//不要一开始就运行，这样会找不到slotsParentTransform
+            if (Time.time > 0.05f)//不要一开始就运行，这样会找不到slotsParentTransform
+            {
                 obstacleTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
                 slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
-    }
+
+				//slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).gameObject.tag = "Obstacle";
+			}
+		
+	}
 }

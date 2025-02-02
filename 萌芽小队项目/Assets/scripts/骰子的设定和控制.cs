@@ -148,9 +148,58 @@ public class 骰子的设定和控制 : MonoBehaviour
 	}
 	void diceMove()
 	{
+		bool canUp = true;
+		if (slotPosY < 棋盘纵向数量)
+		{
+			if (slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY + 1 - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
+				canUp = false;
+		}
+
+		bool canDown = true;
+		if (slotPosY > 1)
+		{
+			if (slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1 - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
+				canDown = false;
+		}
+
+		bool canLeft = true;
+		if (slotPosX > 1)
+		{
+			if (slotsParentTransform.GetChild(slotPosX - 1 - 1 + (slotPosY - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
+				canLeft = false;
+		}
+
+		bool canRight = true;
+		if (slotPosX < 棋盘纵向数量)
+		{
+			if (slotsParentTransform.GetChild(slotPosX + 1 - 1 + (slotPosY - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
+				canRight = false;
+		}
+
 		if (slotPosX >=1 && slotPosY >=1 && slotPosX <= 棋盘横向数量 && slotPosY <= 棋盘纵向数量)
 		{
-			if (Input.GetKey(KeyCode.W) && canUp && slotPosY < 棋盘纵向数量)
+			if (Input.GetKey(KeyCode.W) && !canUp)
+			{
+				Debug.Log("在" + slotPosX + ',' + (slotPosY + 1) + "的位置有障碍物");
+				return;
+			}
+			else if (Input.GetKey(KeyCode.S) && !canDown)
+			{
+				Debug.Log("在" + slotPosX + ',' + (slotPosY - 1) + "的位置有障碍物");
+				return;
+			}
+			else if (Input.GetKey(KeyCode.A) && !canLeft)
+			{
+				Debug.Log("在" + (slotPosX - 1) + ',' + slotPosY + "的位置有障碍物");
+				return;
+			}
+			else if (Input.GetKey(KeyCode.D) && !canRight)
+			{
+				Debug.Log("在" + (slotPosX + 1) + ',' + slotPosY + "的位置有障碍物");
+				return;
+			}
+
+			if (Input.GetKey(KeyCode.W) && canUp && slotPosY < 棋盘纵向数量  )
 			{
                 canUp = true;
                 canDown = false;
@@ -172,7 +221,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 				if (debugLog)
 					Debug.Log("现在的slotposx和slotposy分别是：" + slotPosX + ',' + slotPosY);
 			}
-			else if (Input.GetKey(KeyCode.S) && canDown && slotPosY > 1)
+			else if (Input.GetKey(KeyCode.S) && canDown && slotPosY > 1 )
 			{
                 canUp = false;
                 canDown = true;
@@ -194,7 +243,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 				if (debugLog)
 					Debug.Log("现在的slotposx和slotposy分别是：" + slotPosX + ',' + slotPosY);
 			}
-			else if (Input.GetKey(KeyCode.A) && canLeft && slotPosX > 1)
+			else if (Input.GetKey(KeyCode.A) && canLeft && slotPosX > 1 )
 			{
                 canUp = true;
                 canDown = true;
@@ -216,7 +265,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 				if (debugLog)
 					Debug.Log("现在的slotposx和slotposy分别是：" + slotPosX + ',' + slotPosY);
 			}
-			else if (Input.GetKey(KeyCode.D) && canRight && slotPosX < 棋盘横向数量)
+			else if (Input.GetKey(KeyCode.D) && canRight && slotPosX < 棋盘横向数量 )
 			{
                 canUp = true;
                 canDown = true;
