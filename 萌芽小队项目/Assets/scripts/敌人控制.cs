@@ -79,29 +79,29 @@ public class 敌人控制 : MonoBehaviour
 	//}
 	void enemyMove()
 	{
-		bool canUp= true;
-		if(slotPosY < 棋盘纵向数量)
+		bool canUp = true;
+		if (slotPosY < 棋盘纵向数量) 
 		{
 			if(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY + 1 - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
 				canUp = false;
 		}
 
 		bool canDown = true;
-		if(slotPosY > 1)
+		if (slotPosY > 1) 
 		{
 			if(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1 - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
 				canDown = false;
 		}
 
 		bool canLeft = true;
-		if (slotPosX > 1)
+		if (slotPosX > 1) 
 		{
 			if(slotsParentTransform.GetChild(slotPosX - 1 - 1 + (slotPosY - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
 				canLeft = false;
 		}
 
 		bool canRight = true;
-		if(slotPosX < 棋盘纵向数量)
+		if (slotPosX < 棋盘纵向数量) 
 		{
 			if(slotsParentTransform.GetChild(slotPosX + 1 - 1 + (slotPosY - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
 				canRight = false;
@@ -155,4 +155,31 @@ public class 敌人控制 : MonoBehaviour
 			enemyTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
 			slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
 	}
+
+    /*private void OnCollisionEnter(Collision collision)//事实上，我更想在敌人控制的脚本写这个函数
+    {
+        if (collision == null) return;
+
+		var player = collision.gameObject.GetComponent<骰子的设定和控制>();
+        if (player == null) return;
+
+        if (this.atk < player.hp)//被玩家击败的情况
+        {
+            Debug.Log("destroy了一个目标");
+            Destroy(player.gameObject);
+        }
+        else if (this.hp >= player.atk)//击败玩家的情况
+        {
+            Debug.Log("你已被击败");
+            //Destroy(this.gameObject);//就不要销毁了，省的报错
+
+            //不渲染了，说是要做动画
+            this.GetComponent<Renderer>().enabled = false;
+
+            GameObject 回合计数器 = GameObject.Find("回合计数器");
+            回合计数器.GetComponent<回合计数器>().玩家失败 = true;
+        }
+
+
+    }*/
 }

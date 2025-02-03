@@ -148,28 +148,28 @@ public class 骰子的设定和控制 : MonoBehaviour
 	}
 	void diceMove()
 	{
-		bool canUp = true;
+		//bool canUp = true;
 		if (slotPosY < 棋盘纵向数量)
 		{
 			if (slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY + 1 - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
 				canUp = false;
 		}
 
-		bool canDown = true;
+		//bool canDown = true;
 		if (slotPosY > 1)
 		{
 			if (slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1 - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
 				canDown = false;
 		}
 
-		bool canLeft = true;
+		//bool canLeft = true;
 		if (slotPosX > 1)
 		{
 			if (slotsParentTransform.GetChild(slotPosX - 1 - 1 + (slotPosY - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
 				canLeft = false;
 		}
 
-		bool canRight = true;
+		//bool canRight = true;
 		if (slotPosX < 棋盘纵向数量)
 		{
 			if (slotsParentTransform.GetChild(slotPosX + 1 - 1 + (slotPosY - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
@@ -180,22 +180,22 @@ public class 骰子的设定和控制 : MonoBehaviour
 		{
 			if (Input.GetKey(KeyCode.W) && !canUp)
 			{
-				Debug.Log("在" + slotPosX + ',' + (slotPosY + 1) + "的位置有障碍物");
+				Debug.Log("无法前往(" + slotPosX + ',' + (slotPosY + 1) + ")，因为有障碍物或为上一次移动的反方向");
 				return;
 			}
 			else if (Input.GetKey(KeyCode.S) && !canDown)
 			{
-				Debug.Log("在" + slotPosX + ',' + (slotPosY - 1) + "的位置有障碍物");
+				Debug.Log("无法前往(" + slotPosX + ',' + (slotPosY - 1) + ")，因为有障碍物或为上一次移动的反方向");
 				return;
 			}
 			else if (Input.GetKey(KeyCode.A) && !canLeft)
 			{
-				Debug.Log("在" + (slotPosX - 1) + ',' + slotPosY + "的位置有障碍物");
+				Debug.Log("无法前往(" + (slotPosX - 1) + ',' + slotPosY + ")，因为有障碍物或为上一次移动的反方向");
 				return;
 			}
 			else if (Input.GetKey(KeyCode.D) && !canRight)
 			{
-				Debug.Log("在" + (slotPosX + 1) + ',' + slotPosY + "的位置有障碍物");
+				Debug.Log("无法前往(" + (slotPosX + 1) + ',' + slotPosY + ")，因为有障碍物或为上一次移动的反方向");
 				return;
 			}
 
@@ -305,7 +305,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 		var enemy= collision.gameObject.GetComponent<敌人控制>();
 		if (enemy == null) return;
 
-		if (this.atk > enemy.hp)//战斗胜利的情况
+		if (this.atk >= enemy.hp)//战斗胜利的情况
 		{
 			Debug.Log("destroy了一个目标");
 			Destroy(enemy.gameObject);
