@@ -151,13 +151,13 @@ public class 骰子的设定和控制 : MonoBehaviour
 	}
 	void diceMove()
 	{
-		canUp = true; canDown = true; canLeft = true; canRight = true;
+		//canUp = true; canDown = true; canLeft = true; canRight = true;
 		if (slotPosY < 棋盘纵向数量)//想向上走
 		{
 			if (allSlots[slotPosX - 1, slotPosY + 1 - 1].name.Substring(0, 3) == "Obs")//上边有障碍物
 			{
 				if(allSlots[slotPosX - 1, slotPosY + 1 - 1].GetComponentInChildren<障碍物设定>() != null)//上边的插槽有子物体				
-					if(nowUpAspect.down.num <= allSlots[slotPosX - 1, slotPosY + 1 - 1].GetComponentInChildren<障碍物设定>().hp)//障碍物的hp更大
+					if(nowUpAspect.down.num < allSlots[slotPosX - 1, slotPosY + 1 - 1].GetComponentInChildren<障碍物设定>().hp)//障碍物的hp更大
 					{
 						canUp = false;
 					}								
@@ -326,23 +326,47 @@ public class 骰子的设定和控制 : MonoBehaviour
 		var enemy= collision.gameObject.GetComponent<敌人控制>();
 		if (enemy != null)
 		{
-			if (this.atk >= enemy.hp)//战斗胜利的情况
-			{
-				Debug.Log("destroy了一个目标");
-				Destroy(enemy.gameObject);
-			}
-			else if (this.hp < enemy.atk)//战斗失败的情况
-			{
-				Debug.Log("你已被击败");
-				//Destroy(this.gameObject);//就不要销毁了，省的报错
+			if (bRoundPlayerCanMove)//判断先手情况
+            {
+				if(this.atk >= enemy.hp)//战斗胜利的情况
+                {
+                    Debug.Log("destroy了一个目标");
+                    Destroy(enemy.gameObject);
+                }
+				else
+				{
+                    this.GetComponent<Collider>().enabled = false;//取消碰撞箱以避免重复检测
+                                                                  //Destroy(this.gameObject);//就不要销毁了，省的报错
+                    Debug.Log("你已被击败");
 
-				//不渲染了，说是要做动画
-				this.GetComponent<Renderer>().enabled = false;
+                    //不渲染了，说是要做动画
+                    this.GetComponent<Renderer>().enabled = false;
 
-				GameObject 回合计数器 = GameObject.Find("回合计数器");
-				回合计数器.GetComponent<回合计数器>().玩家失败 = true;
+                    GameObject 回合计数器 = GameObject.Find("回合计数器");
+                    回合计数器.GetComponent<回合计数器>().玩家失败 = true;
+                }
 			}
-		}
+			else
+			{
+				if (this.hp > enemy.atk) 
+				{
+                    Debug.Log("被destroy了一个目标");
+                    Destroy(enemy.gameObject);
+                }
+				else
+				{
+                    this.GetComponent<Collider>().enabled = false;//取消碰撞箱以避免重复检测
+                                                                  //Destroy(this.gameObject);//就不要销毁了，省的报错
+                    Debug.Log("你被击败了");
+
+                    //不渲染了，说是要做动画
+                    this.GetComponent<Renderer>().enabled = false;
+
+                    GameObject 回合计数器 = GameObject.Find("回合计数器");
+                    回合计数器.GetComponent<回合计数器>().玩家失败 = true;
+                }
+			}
+        }
 
 		var obstacle = collision.gameObject.GetComponent<障碍物设定>();
 		if(obstacle != null)

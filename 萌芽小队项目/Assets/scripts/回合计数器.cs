@@ -64,14 +64,6 @@ public class 回合计数器 : MonoBehaviour
 			enemy = GameObject.FindGameObjectsWithTag("Enemy");//更新一下
 
 
-			if (玩家失败)
-			{
-				player.GetComponent<骰子的设定和控制>().bRoundPlayerCanMove = false;
-
-				GameObject.Find("Canvas2/关卡结算界面/失败图片").GetComponent<Image>().enabled = true;
-				Debug.Log("玩家失败了");
-				break;
-			}
 
 			if (player != null && enemy != null && enemy.Length>0)//正常运行的情况
 			{
@@ -90,7 +82,8 @@ public class 回合计数器 : MonoBehaviour
 							if (player.GetComponent<骰子的设定和控制>().bJustMoved)
 							{
 								bRoundPlayerMoved = true;
-								player.GetComponent<骰子的设定和控制>().bRoundPlayerCanMove = false;
+                                yield return new WaitForSeconds(0.05f);//延迟一段时间确保击败敌人
+                                player.GetComponent<骰子的设定和控制>().bRoundPlayerCanMove = false;
 								玩家未操作的时长 = 0;
 								break;
 							}
@@ -124,6 +117,7 @@ public class 回合计数器 : MonoBehaviour
 
 					if (bRoundPlayerMoved && bRoundAllEnemyMoved)//可以进行下个回合，复原变量先
 					{
+						yield return new WaitForSeconds(0.05f);//延迟一段时间确保击败敌人
 						bRoundPlayerMoved = false;
 						bRoundAllEnemyMoved = false;
 						bRoundEnemyMoveCount = 0;
@@ -167,11 +161,26 @@ public class 回合计数器 : MonoBehaviour
 		lui3.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = player.GetComponent<骰子的设定和控制>().nowUpAspect.down.num.ToString();
 		lui3.transform.GetChild(8).GetComponent<TextMeshProUGUI>().text = player.GetComponent<骰子的设定和控制>().nowUpAspect.left.num.ToString();
 		lui3.transform.GetChild(9).GetComponent<TextMeshProUGUI>().text = player.GetComponent<骰子的设定和控制>().nowUpAspect.right.num.ToString();
-	}
+
+		var lui4 = GameObject.Find("Canvas1/左半/ui4/文本").GetComponent<TextMeshProUGUI>();
+		lui4.text = "点数变化：" + "0"
+			+ '\n' + "生命值：" + player.GetComponent<骰子的设定和控制>().hp
+			+ '\n' + "攻击力：" + player.GetComponent<骰子的设定和控制>().atk
+			+ '\n' + "状态buff：" + "None";
+    }
 
 	private void Update()
 	{
 		更新UI();
-	}
+        if (玩家失败)//可随时停止
+        {
+			StopCoroutine(GameLoop());
+            player.GetComponent<骰子的设定和控制>().bRoundPlayerCanMove = false;
+
+            GameObject.Find("Canvas2/关卡结算界面/失败图片").GetComponent<Image>().enabled = true;
+            Debug.Log("玩家失败了");
+            //break;
+        }
+    }
 
 }
