@@ -17,6 +17,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 	public int slotPosY;
 	//另外得知道棋盘有几行几列
 	public GameObject 棋盘;
+	private GameObject[,] allSlots; 
 	private int 棋盘横向数量;
 	private int 棋盘纵向数量;
 
@@ -26,7 +27,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 	public bool bJustMoved = false;
 
 	private Transform diceTransform;//=GameObject.Find("骰子").transform;
-	private Transform slotsParentTransform;//=GameObject.Find("棋盘").transform;
+	//private Transform slotsParentTransform;//=GameObject.Find("棋盘").transform;
 
     public class aspect
     {
@@ -51,6 +52,8 @@ public class 骰子的设定和控制 : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
+		allSlots=棋盘.GetComponent<基础棋盘>().allSlots;
+
         initDice();
 		nowUpAspect=sixAspects[5];//暂时先让5的那面在上边
 
@@ -58,14 +61,14 @@ public class 骰子的设定和控制 : MonoBehaviour
 
 		showOtherAspects();
 
-		slotsParentTransform= GameObject.Find("slotsParent").transform;//!!!注意!!!这行代码得在棋盘生成插槽之后才能调用，所以调整延后一下本脚本的执行顺序
+		//slotsParentTransform= GameObject.Find("slotsParent").transform;//!!!注意!!!这行代码得在棋盘生成插槽之后才能调用，所以调整延后一下本脚本的执行顺序
 																	   //diceTransform.transform.SetParent(trans_plane,true);
 
 		棋盘横向数量 = 棋盘.GetComponent<基础棋盘>().棋盘横向数量;
 		棋盘纵向数量 = (int)(棋盘.GetComponent<基础棋盘>().棋盘横向数量* 棋盘.GetComponent<基础棋盘>().棋盘长宽比);
 
-		diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX-1+(slotPosY-1)*棋盘横向数量).position.x,0.5f,
-			slotsParentTransform.GetChild(slotPosX-1+(slotPosY-1)*棋盘横向数量).position.z);
+		diceTransform.position = new Vector3(allSlots[slotPosX -1,slotPosY -1].transform.position.x,0.5f,
+			allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
 
 		hp = nowUpAspect.num;
 		atk = hp;
@@ -148,32 +151,50 @@ public class 骰子的设定和控制 : MonoBehaviour
 	}
 	void diceMove()
 	{
-		//bool canUp = true;
-		if (slotPosY < 棋盘纵向数量)
+		canUp = true; canDown = true; canLeft = true; canRight = true;
+		if (slotPosY < 棋盘纵向数量)//想向上走
 		{
-			if (slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY + 1 - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
-				canUp = false;
+			if (allSlots[slotPosX - 1, slotPosY + 1 - 1].name.Substring(0, 3) == "Obs")//上边有障碍物
+			{
+				if(allSlots[slotPosX - 1, slotPosY + 1 - 1].GetComponentInChildren<障碍物设定>() != null)//上边的插槽有子物体				
+					if(nowUpAspect.down.num <= allSlots[slotPosX - 1, slotPosY + 1 - 1].GetComponentInChildren<障碍物设定>().hp)//障碍物的hp更大
+					{
+						canUp = false;
+					}								
+			}
 		}
-
-		//bool canDown = true;
 		if (slotPosY > 1)
 		{
-			if (slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1 - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
-				canDown = false;
+			if (allSlots[slotPosX - 1, slotPosY - 1 - 1].transform.name.Substring(0, 3) == "Obs")
+			{
+				if(allSlots[slotPosX - 1, slotPosY - 1 - 1].GetComponentInChildren<障碍物设定>() != null)
+					if(nowUpAspect.up.num <= allSlots[slotPosX - 1, slotPosY - 1 - 1].GetComponentInChildren<障碍物设定>().hp)
+					{
+						canDown = false;
+					}
+			}
 		}
-
-		//bool canLeft = true;
 		if (slotPosX > 1)
 		{
-			if (slotsParentTransform.GetChild(slotPosX - 1 - 1 + (slotPosY - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
-				canLeft = false;
+			if (allSlots[slotPosX - 1 - 1, slotPosY - 1].transform.name.Substring(0, 3) == "Obs")
+			{
+				if(allSlots[slotPosX - 1 - 1, slotPosY - 1].GetComponentInChildren<障碍物设定>() != null)
+					if(nowUpAspect.right.num <= allSlots[slotPosX - 1 - 1, slotPosY - 1].GetComponentInChildren<障碍物设定>().hp)
+					{
+						canLeft = false;
+					}
+			}
 		}
-
-		//bool canRight = true;
 		if (slotPosX < 棋盘纵向数量)
 		{
-			if (slotsParentTransform.GetChild(slotPosX + 1 - 1 + (slotPosY - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
-				canRight = false;
+			if (allSlots[slotPosX + 1 - 1, slotPosY - 1].transform.name.Substring(0, 3) == "Obs")
+			{
+				if(allSlots[slotPosX + 1 - 1, slotPosY - 1].GetComponentInChildren<障碍物设定>() != null)
+					if(nowUpAspect.left.num <= allSlots[slotPosX + 1 - 1, slotPosY - 1].GetComponentInChildren<障碍物设定>().hp)
+					{
+						canRight = false;
+					}
+			}
 		}
 
 		if (slotPosX >=1 && slotPosY >=1 && slotPosX <= 棋盘横向数量 && slotPosY <= 棋盘纵向数量)
@@ -207,8 +228,8 @@ public class 骰子的设定和控制 : MonoBehaviour
                 canRight = true;
 
                 slotPosY += 1;
-				diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
-				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
+				diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,
+				allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
 
                 int Num = nowUpAspect.down.num;
                 nowUpAspect.up.num = nowUpAspect.num;
@@ -229,8 +250,8 @@ public class 骰子的设定和控制 : MonoBehaviour
                 canRight = true;
 
                 slotPosY -= 1;
-				diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
-				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
+				diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,
+				allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
 
                 int Num = nowUpAspect.up.num;
                 nowUpAspect.up.num = 7 - nowUpAspect.num;
@@ -251,8 +272,8 @@ public class 骰子的设定和控制 : MonoBehaviour
                 canRight = false;
 
                 slotPosX -= 1;
-				diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
-				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
+				diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,
+				allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
 
                 int Num = nowUpAspect.right.num;
                 nowUpAspect.left.num = nowUpAspect.num;
@@ -273,8 +294,8 @@ public class 骰子的设定和控制 : MonoBehaviour
                 canRight = true;
 
                 slotPosX += 1;
-				diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
-				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
+				diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,
+				allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
 
                 int Num = nowUpAspect.left.num;
                 nowUpAspect.left.num = 7 - nowUpAspect.num;
@@ -293,9 +314,9 @@ public class 骰子的设定和控制 : MonoBehaviour
 	private void OnValidate()
 	{
 		if (UnityEditor.EditorApplication.isPlaying)//只有在播放模式才做这个操作，要不然也会空引用
-			if (Time.time>1f)//不要一开始就运行，这样会找不到slotsParentTransform
-			diceTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
-			slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
+			if (Time.time>0.01f)//不要一开始就运行，这样会找不到slotsParentTransform
+			diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,
+			allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
 	}
 
 	private void OnCollisionEnter(Collision collision)//事实上，我更想在敌人控制的脚本写这个函数
@@ -303,24 +324,36 @@ public class 骰子的设定和控制 : MonoBehaviour
 		if (collision == null) return;
 
 		var enemy= collision.gameObject.GetComponent<敌人控制>();
-		if (enemy == null) return;
-
-		if (this.atk >= enemy.hp)//战斗胜利的情况
+		if (enemy != null)
 		{
-			Debug.Log("destroy了一个目标");
-			Destroy(enemy.gameObject);
+			if (this.atk >= enemy.hp)//战斗胜利的情况
+			{
+				Debug.Log("destroy了一个目标");
+				Destroy(enemy.gameObject);
+			}
+			else if (this.hp < enemy.atk)//战斗失败的情况
+			{
+				Debug.Log("你已被击败");
+				//Destroy(this.gameObject);//就不要销毁了，省的报错
+
+				//不渲染了，说是要做动画
+				this.GetComponent<Renderer>().enabled = false;
+
+				GameObject 回合计数器 = GameObject.Find("回合计数器");
+				回合计数器.GetComponent<回合计数器>().玩家失败 = true;
+			}
 		}
-		else if (this.hp < enemy.atk)//战斗失败的情况
+
+		var obstacle = collision.gameObject.GetComponent<障碍物设定>();
+		if(obstacle != null)
 		{
-			Debug.Log("你已被击败");
-			//Destroy(this.gameObject);//就不要销毁了，省的报错
-
-			//不渲染了，说是要做动画
-			this.GetComponent<Renderer>().enabled = false;
-
-			GameObject 回合计数器 = GameObject.Find("回合计数器");
-			回合计数器.GetComponent<回合计数器>().玩家失败 = true;
+			if(this.atk >= obstacle.hp)
+			{
+				Debug.Log("Destroy了一个障碍物");
+				Destroy(obstacle.gameObject);
+			}		
 		}
+		
 
 		
 	}

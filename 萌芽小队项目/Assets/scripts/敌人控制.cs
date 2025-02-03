@@ -2,9 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class 敌人控制 : MonoBehaviour
 {
+	public bool canUp = true;
+	public bool canDown = true;
+	public bool canLeft = true;
+	public bool canRight = true;
+
+
 	public int hp;
 	public int atk;
 
@@ -12,6 +19,7 @@ public class 敌人控制 : MonoBehaviour
 	public int slotPosY;
 	//另外得知道棋盘有几行几列
 	public GameObject 棋盘;
+	private GameObject[,] allSlots; 
 	private int 棋盘横向数量;
 	private int 棋盘纵向数量;
 
@@ -21,7 +29,7 @@ public class 敌人控制 : MonoBehaviour
 	public bool bJustMoved = false;
 
 	private Transform enemyTransform;//=GameObject.Find("骰子").transform;
-	private Transform slotsParentTransform;//=GameObject.Find("棋盘").transform;
+	//private Transform slotsParentTransform;//=GameObject.Find("棋盘").transform;
 
 	public GameObject 骰子;
 	private int dicePosX;
@@ -32,16 +40,18 @@ public class 敌人控制 : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		enemyTransform = this.transform;//测试一下直接这样行不行
+		allSlots=棋盘.GetComponent<基础棋盘>().allSlots;
 
-		slotsParentTransform = GameObject.Find("slotsParent").transform;//!!!注意!!!这行代码得在棋盘生成插槽之后才能调用，所以调整延后一下本脚本的执行顺序
-																		//diceTransform.transform.SetParent(trans_plane,true);
+		enemyTransform = this.transform;//测试一下直接这样行不行
 
 		棋盘横向数量 = 棋盘.GetComponent<基础棋盘>().棋盘横向数量;
 		棋盘纵向数量 = (int)(棋盘.GetComponent<基础棋盘>().棋盘横向数量 * 棋盘.GetComponent<基础棋盘>().棋盘长宽比);
 
-		enemyTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
-			slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
+		enemyTransform.position = new Vector3(allSlots[slotPosX -1,slotPosY -1].transform.position.x, 0.5f,
+			allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
+
+		allSlots[slotPosX - 1, slotPosY - 1].name = "Enemy" + allSlots[slotPosX - 1, slotPosY - 1].transform.name;
+		enemyTransform.SetParent(allSlots[slotPosX - 1, slotPosY - 1].transform);
 
 		dicePosX = 骰子.GetComponent<骰子的设定和控制>().slotPosX;
 		dicePosY = 骰子.GetComponent<骰子的设定和控制>().slotPosY;
@@ -68,118 +78,119 @@ public class 敌人控制 : MonoBehaviour
 			//执行移动的代码
 			enemyMove();
 		}
+
+		validateIntervalTime += Time.deltaTime;
 	}
 
-	//void showOtherAspects()
-	//{
-	//	Debug.Log("现在朝上的面为：" + nowUpAspect.num + '\n'
-	//		+ "上边的面为" + nowUpAspect.up.num + "下边的面为" + nowUpAspect.down.num
-	//		+ "左边的面为" + nowUpAspect.left.num + "右边的面为" + nowUpAspect.right.num);
-
-	//}
 	void enemyMove()
 	{
-		bool canUp = true;
+		canUp = true; canDown = true; canLeft = true; canRight = true;
 		if (slotPosY < 棋盘纵向数量) 
 		{
-			if(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY + 1 - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
+			if(allSlots[slotPosX - 1, slotPosY + 1 - 1].transform.name.Substring(0, 3) == "Obs" || allSlots[slotPosX - 1, slotPosY + 1 - 1].transform.name.Substring(0, 3) == "Ene")
 				canUp = false;
 		}
-
-		bool canDown = true;
 		if (slotPosY > 1) 
 		{
-			if(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1 - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
+			if(allSlots[slotPosX - 1, slotPosY - 1 - 1].transform.name.Substring(0, 3) == "Obs" || allSlots[slotPosX - 1, slotPosY - 1 - 1].transform.name.Substring(0, 3) == "Ene")
 				canDown = false;
 		}
-
-		bool canLeft = true;
 		if (slotPosX > 1) 
 		{
-			if(slotsParentTransform.GetChild(slotPosX - 1 - 1 + (slotPosY - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
+			if(allSlots[slotPosX - 1 - 1, slotPosY - 1].transform.name.Substring(0, 3) == "Obs" || allSlots[slotPosX - 1 - 1, slotPosY - 1].transform.name.Substring(0, 3) == "Ene")
 				canLeft = false;
 		}
-
-		bool canRight = true;
 		if (slotPosX < 棋盘纵向数量) 
 		{
-			if(slotsParentTransform.GetChild(slotPosX + 1 - 1 + (slotPosY - 1) * 棋盘横向数量).name.Substring(0, 3) == "Obs")
+			if(allSlots[slotPosX + 1 - 1, slotPosY - 1].transform.name.Substring(0, 3) == "Obs" || allSlots[slotPosX + 1 - 1, slotPosY - 1].transform.name.Substring(0, 3) == "Ene")
 				canRight = false;
 		}
-
+		//Debug.Log(canUp+","+canDown+","+canLeft+","+canRight);
 
 		if (slotPosX >= 1 && slotPosY >= 1 && slotPosX <= 棋盘横向数量 && slotPosY <= 棋盘纵向数量)
 		{
 			if (dicePosY>slotPosY && slotPosY < 棋盘纵向数量 && canUp)
 			{
-				slotPosY += 1;
-				enemyTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
-				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
+				
+				//enemyTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,[slotPosX - 1, slotPosY - 1].transform.position.z);
 				
 				bJustMoved = true;
 				moveIntervalTime = 0;
+				changeEnemyState(slotPosX, slotPosY, slotPosX, slotPosY + 1);
+				slotPosY += 1;
 			}
 			else if (dicePosY<slotPosY && slotPosY > 1 && canDown)
 			{
-				slotPosY -= 1;
-				enemyTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
-				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
+				
+				//enemyTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
 				
 				bJustMoved = true;
 				moveIntervalTime = 0;
+				changeEnemyState(slotPosX, slotPosY, slotPosX, slotPosY - 1);
+				slotPosY -= 1;
 			}
 			else if (dicePosX<slotPosX && slotPosX > 1 && canLeft)
 			{
-				slotPosX -= 1;
-				enemyTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
-				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
+				
+				//enemyTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
 				
 				bJustMoved = true;
 				moveIntervalTime = 0;
+				changeEnemyState(slotPosX, slotPosY, slotPosX - 1, slotPosY);
+				slotPosX -= 1;
 			}
 			else if (dicePosX>slotPosX && slotPosX < 棋盘横向数量 && canRight)
 			{
-				slotPosX += 1;
-				enemyTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
-				slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
 				
+				//enemyTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
+				
+				bJustMoved = true;
+				moveIntervalTime = 0;
+				changeEnemyState(slotPosX, slotPosY, slotPosX + 1, slotPosY);
+				slotPosX += 1;
+			}
+			else
+			{
+				Debug.Log("敌人想动，却动不了");
 				bJustMoved = true;
 				moveIntervalTime = 0;
 			}
 		}
 	}
-	private void OnValidate()
+
+	//这以下的三个函数使得可以通过onvalidate更改障碍物和插槽状态
+	void changeEnemyState(int originalX, int originalY, int newX, int newY)
 	{
-		if(UnityEditor.EditorApplication.isPlaying)//只有在播放模式才做这个操作，要不然也会空引用
-			if (Time.time > 1f)//不要一开始就运行，这样会找不到slotsParentTransform
-			enemyTransform.position = new Vector3(slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.x, 0.5f,
-			slotsParentTransform.GetChild(slotPosX - 1 + (slotPosY - 1) * 棋盘横向数量).position.z);
+		allSlots[originalX - 1, originalY - 1].name = originalX.ToString() + ',' + originalY.ToString();
+
+		//enemyTransform.SetParent(allSlots[newX - 1, newY - 1].transform);
+		enemyTransform.position = new Vector3(allSlots[newX - 1, newY - 1].transform.position.x, 0.5f,
+				allSlots[newX - 1, newY - 1].transform.position.z);
+
+		allSlots[newX - 1, newY - 1].name = "Enemy" + newX.ToString() + ',' + newY.ToString();
 	}
 
-    /*private void OnCollisionEnter(Collision collision)//事实上，我更想在敌人控制的脚本写这个函数
-    {
-        if (collision == null) return;
+	float validateIntervalTime = 0f;
+	int originalX, originalY;
+	private void OnValidate()
+	{
+		if (validateIntervalTime > 1f)
+		{
+			if (allSlots[slotPosX - 1, slotPosY - 1].transform.childCount == 0)
+			{
+				changeEnemyState(originalX, originalY, slotPosX, slotPosY);
+				validateIntervalTime = 0f;
 
-		var player = collision.gameObject.GetComponent<骰子的设定和控制>();
-        if (player == null) return;
+				originalX = slotPosX; originalY = slotPosY;
 
-        if (this.atk < player.hp)//被玩家击败的情况
-        {
-            Debug.Log("destroy了一个目标");
-            Destroy(player.gameObject);
-        }
-        else if (this.hp >= player.atk)//击败玩家的情况
-        {
-            Debug.Log("你已被击败");
-            //Destroy(this.gameObject);//就不要销毁了，省的报错
-
-            //不渲染了，说是要做动画
-            this.GetComponent<Renderer>().enabled = false;
-
-            GameObject 回合计数器 = GameObject.Find("回合计数器");
-            回合计数器.GetComponent<回合计数器>().玩家失败 = true;
-        }
-
-
-    }*/
+				#if UNITY_EDITOR
+				UnityEditor.EditorApplication.delayCall += () =>
+				{
+					if (this == null) return;
+					enemyTransform.SetParent(allSlots[slotPosX - 1, slotPosY - 1].transform);//设置障碍物在插槽的子级，就可以从插槽找到障碍物
+				};
+				#endif
+			}
+		}
+	}
 }

@@ -9,7 +9,7 @@ public class 基础棋盘 : MonoBehaviour
     public float 棋盘长宽比;
 
 	private int 棋盘纵向数量;// = (int)(棋盘横向数量 * 棋盘长宽比);
-	private GameObject[,] allSlots;// = new GameObject[棋盘横向数量, 棋盘纵向数量];
+	public GameObject[,] allSlots;// = new GameObject[棋盘横向数量, 棋盘纵向数量];
 
 	private Transform trans_plane;
 
