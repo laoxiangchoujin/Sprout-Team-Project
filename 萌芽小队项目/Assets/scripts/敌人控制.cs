@@ -11,6 +11,9 @@ public class 敌人控制 : MonoBehaviour
 	public bool canLeft = true;
 	public bool canRight = true;
 
+	//以下两种类型的小怪攻击范围有差异，但位移距离与其他小怪一致
+	public bool M4;
+	public bool M6;
 
 	public int hp;
 	public int atk;
@@ -56,7 +59,6 @@ public class 敌人控制 : MonoBehaviour
 		dicePosX = 骰子.GetComponent<骰子的设定和控制>().slotPosX;
 		dicePosY = 骰子.GetComponent<骰子的设定和控制>().slotPosY;
 
-		atk = hp;
 	}
 
 	// Update is called once per frame

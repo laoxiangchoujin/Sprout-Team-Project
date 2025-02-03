@@ -25,7 +25,8 @@ public class 障碍物设定 : MonoBehaviour
         obstacleTransform = this.transform;
 
         allSlots=棋盘.GetComponent<基础棋盘>().allSlots;
-        originalX=slotPosX; originalY=slotPosY;
+        originalX=slotPosX;
+        originalY=slotPosY;
 
         StartCoroutine(延时());
 	}
@@ -72,7 +73,8 @@ public class 障碍物设定 : MonoBehaviour
 				changeObstacleState(originalX, originalY, slotPosX, slotPosY);
 				changeIntervalTime = 0f;
 
-				originalX = slotPosX; originalY = slotPosY;
+				originalX = slotPosX; 
+                originalY = slotPosY;
 
                 #if UNITY_EDITOR
 				UnityEditor.EditorApplication.delayCall += () =>
