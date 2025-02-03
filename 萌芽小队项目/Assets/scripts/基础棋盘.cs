@@ -18,18 +18,18 @@ public class 基础棋盘 : MonoBehaviour
 
 	private bool bHasChanged = false;
 	private float changeIntervalTime = 0;//怎么说也1秒变一回，别太快
-	private bool bJustChanged=false;//是看是不是刚刚改变了inspector的值，不要改了值以后立马变，会卡
+	private bool bJustChanged = false;//是看是不是刚刚改变了inspector的值，不要改了值以后立马变，会卡
 
 	// Start is called before the first frame update
 	void Start()
     {
-        trans_plane=GameObject.Find("棋盘").transform;
-        updatePlane();		
+		trans_plane = GameObject.Find("棋盘").transform;
+        updatePlane();
 
 		GameObject slotsParent = new GameObject("slotsParent");
 		slotsParentTransform=slotsParent.transform;
 
-		//slotsParent.transform.SetParent(trans_plane,true);;
+		//slotsParent.transform.SetParent(trans_plane,true);
 
 		initAllSlots();//需要先创建父物体，在生成插槽，否则先生成的插槽没有父级
 	}
@@ -62,8 +62,8 @@ public class 基础棋盘 : MonoBehaviour
 
     void updatePlane()
     {
-        trans_plane.localScale=new Vector3(棋盘横向数量*0.1f,1*0.1f,棋盘横向数量*棋盘长宽比*0.1f);
-        trans_plane.position=new Vector3( 棋盘横向数量*0.5f , 0,  棋盘横向数量 * 棋盘长宽比*0.5f);
+		trans_plane.localScale = new Vector3(棋盘横向数量 * 0.1f, 1 * 0.1f, 棋盘横向数量 * 棋盘长宽比 * 0.1f);
+		trans_plane.position = new Vector3(棋盘横向数量 * 0.5f, 0, 棋盘横向数量 * 棋盘长宽比 * 0.5f);
     }
     void drawAxis()
     {      
