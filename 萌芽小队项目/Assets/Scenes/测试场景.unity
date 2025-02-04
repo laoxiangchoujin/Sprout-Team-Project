@@ -2144,7 +2144,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &563121577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2163,6 +2163,10 @@ MonoBehaviour:
   canRight: 1
   M4: 0
   M6: 0
+  canUpLeft: 0
+  canUpRight: 0
+  canDownLeft: 0
+  canDownRight: 0
   hp: 2
   atk: 2
   slotPosX: 4
@@ -2171,6 +2175,7 @@ MonoBehaviour:
   bJustMoved: 0
   "\u9AB0\u5B50": {fileID: 1038645860}
   bRoundEnemyCanMove: 0
+  rangeAttackTag: {fileID: 0}
 --- !u!136 &563121578
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2832,6 +2837,10 @@ MonoBehaviour:
   canRight: 1
   M4: 0
   M6: 0
+  canUpLeft: 0
+  canUpRight: 0
+  canDownLeft: 0
+  canDownRight: 0
   hp: 2
   atk: 2
   slotPosX: 4
@@ -2840,6 +2849,7 @@ MonoBehaviour:
   bJustMoved: 0
   "\u9AB0\u5B50": {fileID: 1038645860}
   bRoundEnemyCanMove: 0
+  rangeAttackTag: {fileID: 0}
 --- !u!136 &633173597
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2993,16 +3003,21 @@ MonoBehaviour:
   canDown: 1
   canLeft: 1
   canRight: 1
-  M4: 0
+  M4: 1
   M6: 0
-  hp: 4
-  atk: 4
+  canUpLeft: 1
+  canUpRight: 1
+  canDownLeft: 1
+  canDownRight: 1
+  hp: 3
+  atk: 3
   slotPosX: 6
   slotPosY: 6
   "\u68CB\u76D8": {fileID: 50955333}
   bJustMoved: 0
   "\u9AB0\u5B50": {fileID: 1038645860}
   bRoundEnemyCanMove: 0
+  rangeAttackTag: {fileID: 0}
 --- !u!136 &635212337
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3022,7 +3037,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
@@ -3310,6 +3325,7 @@ MonoBehaviour:
   bRoundPlayerMoved: 0
   bRoundEnemyMoveCount: 0
   "\u654C\u4EBA\u79FB\u52A8\u7684\u65F6\u95F4\u95F4\u9694": 0.3
+  "\u8FDC\u7A0B\u653B\u51FB\u7684\u65F6\u95F4\u95F4\u9694": 0.1
   debuglog: 0
   "\u73A9\u5BB6\u5931\u8D25": 0
   canvas1: {fileID: 873376682}
@@ -3333,7 +3349,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &719992271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3352,6 +3368,10 @@ MonoBehaviour:
   canRight: 1
   M4: 0
   M6: 0
+  canUpLeft: 0
+  canUpRight: 0
+  canDownLeft: 0
+  canDownRight: 0
   hp: 3
   atk: 3
   slotPosX: 3
@@ -3360,6 +3380,7 @@ MonoBehaviour:
   bJustMoved: 0
   "\u9AB0\u5B50": {fileID: 1038645860}
   bRoundEnemyCanMove: 0
+  rangeAttackTag: {fileID: 0}
 --- !u!136 &719992272
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4861,6 +4882,10 @@ MonoBehaviour:
   canRight: 1
   M4: 0
   M6: 0
+  canUpLeft: 0
+  canUpRight: 0
+  canDownLeft: 0
+  canDownRight: 0
   hp: 2
   atk: 2
   slotPosX: 4
@@ -4869,6 +4894,7 @@ MonoBehaviour:
   bJustMoved: 0
   "\u9AB0\u5B50": {fileID: 1038645860}
   bRoundEnemyCanMove: 0
+  rangeAttackTag: {fileID: 0}
 --- !u!136 &905512456
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4978,7 +5004,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &914754897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4997,6 +5023,10 @@ MonoBehaviour:
   canRight: 1
   M4: 0
   M6: 0
+  canUpLeft: 0
+  canUpRight: 0
+  canDownLeft: 0
+  canDownRight: 0
   hp: 4
   atk: 4
   slotPosX: 8
@@ -5005,6 +5035,7 @@ MonoBehaviour:
   bJustMoved: 0
   "\u9AB0\u5B50": {fileID: 1038645860}
   bRoundEnemyCanMove: 0
+  rangeAttackTag: {fileID: 0}
 --- !u!136 &914754898
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5354,6 +5385,10 @@ MonoBehaviour:
   canRight: 1
   M4: 0
   M6: 0
+  canUpLeft: 0
+  canUpRight: 0
+  canDownLeft: 0
+  canDownRight: 0
   hp: 2
   atk: 2
   slotPosX: 4
@@ -5362,6 +5397,7 @@ MonoBehaviour:
   bJustMoved: 0
   "\u9AB0\u5B50": {fileID: 1038645860}
   bRoundEnemyCanMove: 0
+  rangeAttackTag: {fileID: 0}
 --- !u!136 &977212709
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6545,6 +6581,10 @@ MonoBehaviour:
   canRight: 1
   M4: 0
   M6: 0
+  canUpLeft: 0
+  canUpRight: 0
+  canDownLeft: 0
+  canDownRight: 0
   hp: 2
   atk: 2
   slotPosX: 4
@@ -6553,6 +6593,7 @@ MonoBehaviour:
   bJustMoved: 0
   "\u9AB0\u5B50": {fileID: 1038645860}
   bRoundEnemyCanMove: 0
+  rangeAttackTag: {fileID: 0}
 --- !u!136 &1153961354
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7383,7 +7424,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560308626}
-  m_Text: 4
+  m_Text: 3
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -7937,6 +7978,10 @@ MonoBehaviour:
   canRight: 1
   M4: 0
   M6: 0
+  canUpLeft: 0
+  canUpRight: 0
+  canDownLeft: 0
+  canDownRight: 0
   hp: 2
   atk: 2
   slotPosX: 4
@@ -7945,6 +7990,7 @@ MonoBehaviour:
   bJustMoved: 0
   "\u9AB0\u5B50": {fileID: 1038645860}
   bRoundEnemyCanMove: 0
+  rangeAttackTag: {fileID: 0}
 --- !u!136 &1621185352
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9656,6 +9702,10 @@ MonoBehaviour:
   canRight: 1
   M4: 0
   M6: 0
+  canUpLeft: 0
+  canUpRight: 0
+  canDownLeft: 0
+  canDownRight: 0
   hp: 2
   atk: 2
   slotPosX: 4
@@ -9664,6 +9714,7 @@ MonoBehaviour:
   bJustMoved: 0
   "\u9AB0\u5B50": {fileID: 1038645860}
   bRoundEnemyCanMove: 0
+  rangeAttackTag: {fileID: 0}
 --- !u!136 &1879859818
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9813,12 +9864,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d49e463af3fe2f49aae973beca1d081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canUp: 1
-  canDown: 1
-  canLeft: 1
-  canRight: 1
+  canUp: 0
+  canDown: 0
+  canLeft: 0
+  canRight: 0
   M4: 0
   M6: 1
+  canUpLeft: 0
+  canUpRight: 0
+  canDownLeft: 0
+  canDownRight: 0
   hp: 3
   atk: 999
   slotPosX: 7
@@ -9827,6 +9882,7 @@ MonoBehaviour:
   bJustMoved: 0
   "\u9AB0\u5B50": {fileID: 1038645860}
   bRoundEnemyCanMove: 0
+  rangeAttackTag: {fileID: 3138593602151282070, guid: db129e6a49b5c6e449e47582397eca66, type: 3}
 --- !u!136 &1881080067
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10011,7 +10067,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &1971303511
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10057,6 +10113,10 @@ MonoBehaviour:
   canRight: 1
   M4: 0
   M6: 0
+  canUpLeft: 0
+  canUpRight: 0
+  canDownLeft: 0
+  canDownRight: 0
   hp: 5
   atk: 5
   slotPosX: 8
@@ -10065,6 +10125,7 @@ MonoBehaviour:
   bJustMoved: 0
   "\u9AB0\u5B50": {fileID: 1038645860}
   bRoundEnemyCanMove: 0
+  rangeAttackTag: {fileID: 0}
 --- !u!136 &1971303513
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10220,6 +10281,10 @@ MonoBehaviour:
   canRight: 1
   M4: 0
   M6: 0
+  canUpLeft: 0
+  canUpRight: 0
+  canDownLeft: 0
+  canDownRight: 0
   hp: 2
   atk: 2
   slotPosX: 4
@@ -10228,6 +10293,7 @@ MonoBehaviour:
   bJustMoved: 0
   "\u9AB0\u5B50": {fileID: 1038645860}
   bRoundEnemyCanMove: 0
+  rangeAttackTag: {fileID: 0}
 --- !u!136 &1995095452
 CapsuleCollider:
   m_ObjectHideFlags: 0

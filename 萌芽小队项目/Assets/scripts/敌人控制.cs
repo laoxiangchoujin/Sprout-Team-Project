@@ -11,11 +11,15 @@ public class 敌人控制 : MonoBehaviour
 	public bool canLeft = true;
 	public bool canRight = true;
 
-	//以下两种类型的小怪攻击范围有差异，但位移距离与其他小怪一致
-	public bool M4;
+    //以下两种类型的小怪位移方式与其他小怪不同
+    public bool M4;
 	public bool M6;
+    public bool canUpLeft = false;
+    public bool canUpRight = false;
+    public bool canDownLeft = false;
+    public bool canDownRight = false;
 
-	public int hp;
+    public int hp;
 	public int atk;
 
 	public int slotPosX;
@@ -40,8 +44,11 @@ public class 敌人控制 : MonoBehaviour
 
 	public bool bRoundEnemyCanMove;
 
-	// Start is called before the first frame update
-	void Start()
+    private GameObject player;
+    public GameObject rangeAttackTag; //远程攻击标记
+
+    // Start is called before the first frame update
+    void Start()
 	{
 		allSlots=棋盘.GetComponent<基础棋盘>().allSlots;
 
@@ -59,7 +66,8 @@ public class 敌人控制 : MonoBehaviour
 		dicePosX = 骰子.GetComponent<骰子的设定和控制>().slotPosX;
 		dicePosY = 骰子.GetComponent<骰子的设定和控制>().slotPosY;
 
-	}
+        player = GameObject.FindWithTag("Player");
+    }
 
 	// Update is called once per frame
 	void Update()
@@ -86,8 +94,19 @@ public class 敌人控制 : MonoBehaviour
 
 	void enemyMove()
 	{
-		canUp = true; canDown = true; canLeft = true; canRight = true;
-		if (slotPosY < 棋盘纵向数量) 
+        if (M6)
+        {
+            canUp = false; canDown = false; canLeft = false; canRight = false;
+            canUpLeft = false; canUpRight = false; canDownLeft = false; canDownRight = false;
+            Instantiate(rangeAttackTag, player.transform.position, player.transform.rotation);
+            Debug.Log("生成了一个远程攻击标记");
+            bJustMoved = true;
+            moveIntervalTime = 0;
+            return;
+        }
+        canUp = true; canDown = true; canLeft = true; canRight = true;
+        canUpLeft = true; canUpRight = true; canDownLeft = true; canDownRight = true;
+        if (slotPosY < 棋盘纵向数量) 
 		{
 			if(allSlots[slotPosX - 1, slotPosY + 1 - 1].transform.name.Substring(0, 3) == "Obs" || allSlots[slotPosX - 1, slotPosY + 1 - 1].transform.name.Substring(0, 3) == "Ene")
 				canUp = false;
@@ -107,11 +126,71 @@ public class 敌人控制 : MonoBehaviour
 			if(allSlots[slotPosX + 1 - 1, slotPosY - 1].transform.name.Substring(0, 3) == "Obs" || allSlots[slotPosX + 1 - 1, slotPosY - 1].transform.name.Substring(0, 3) == "Ene")
 				canRight = false;
 		}
-		//Debug.Log(canUp+","+canDown+","+canLeft+","+canRight);
 
-		if (slotPosX >= 1 && slotPosY >= 1 && slotPosX <= 棋盘横向数量 && slotPosY <= 棋盘纵向数量)
+        if (slotPosY < 棋盘纵向数量 && slotPosX > 1)
+        {
+            if (allSlots[slotPosX - 1 - 1, slotPosY + 1 - 1].transform.name.Substring(0, 3) == "Obs" || allSlots[slotPosX - 1 - 1, slotPosY + 1 - 1].transform.name.Substring(0, 3) == "Ene")
+                canUpLeft = false;
+        }
+        if (slotPosY < 棋盘纵向数量 && slotPosX < 棋盘纵向数量)
+        {
+            if (allSlots[slotPosX + 1 - 1, slotPosY + 1 - 1].transform.name.Substring(0, 3) == "Obs" || allSlots[slotPosX + 1 - 1, slotPosY + 1 - 1].transform.name.Substring(0, 3) == "Ene")
+                canUpRight = false;
+        }
+        if (slotPosY > 1 && slotPosX > 1)
+        {
+            if (allSlots[slotPosX - 1 - 1, slotPosY - 1 - 1].transform.name.Substring(0, 3) == "Obs" || allSlots[slotPosX - 1 - 1, slotPosY - 1 - 1].transform.name.Substring(0, 3) == "Ene")
+                canDownLeft = false;
+        }
+        if (slotPosY > 1 && slotPosX < 棋盘纵向数量)
+        {
+            if (allSlots[slotPosX + 1 - 1, slotPosY - 1 - 1].transform.name.Substring(0, 3) == "Obs" || allSlots[slotPosX + 1 - 1, slotPosY - 1 - 1].transform.name.Substring(0, 3) == "Ene")
+                canDownRight = false;
+        }
+        //Debug.Log(canUp+","+canDown+","+canLeft+","+canRight);
+
+        if (slotPosX >= 1 && slotPosY >= 1 && slotPosX <= 棋盘横向数量 && slotPosY <= 棋盘纵向数量)
 		{
-			if (dicePosY>slotPosY && slotPosY < 棋盘纵向数量 && canUp)
+            if (M4)//可斜向移动
+            {
+                if (dicePosY > slotPosY && slotPosY < 棋盘纵向数量 && dicePosX < slotPosX && slotPosX > 1 && canUpLeft)
+                {
+                    bJustMoved = true;
+                    moveIntervalTime = 0;
+                    changeEnemyState(slotPosX, slotPosY, slotPosX - 1, slotPosY + 1);
+                    slotPosY += 1;
+                    slotPosX -= 1;
+                    return;
+                }
+                else if (dicePosY > slotPosY && slotPosY < 棋盘纵向数量 && dicePosX > slotPosX && slotPosX < 棋盘横向数量 && canUpRight)
+                {
+                    bJustMoved = true;
+                    moveIntervalTime = 0;
+                    changeEnemyState(slotPosX, slotPosY, slotPosX + 1, slotPosY + 1);
+                    slotPosY += 1;
+                    slotPosX += 1;
+                    return;
+                }
+                else if (dicePosY < slotPosY && slotPosY > 1 && dicePosX < slotPosX && slotPosX > 1 && canDownLeft)
+                {
+                    bJustMoved = true;
+                    moveIntervalTime = 0;
+                    changeEnemyState(slotPosX, slotPosY, slotPosX - 1, slotPosY - 1);
+                    slotPosY -= 1;
+                    slotPosX -= 1;
+                    return;
+                }
+                else if (dicePosY < slotPosY && slotPosY > 1 && dicePosX > slotPosX && slotPosX < 棋盘横向数量 && canDownRight)
+                {
+                    bJustMoved = true;
+                    moveIntervalTime = 0;
+                    changeEnemyState(slotPosX, slotPosY, slotPosX + 1, slotPosY - 1);
+                    slotPosY -= 1;
+                    slotPosX += 1;
+                    return;
+                }
+            }
+            if (dicePosY>slotPosY && slotPosY < 棋盘纵向数量 && canUp)
 			{
 				
 				//enemyTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,[slotPosX - 1, slotPosY - 1].transform.position.z);
