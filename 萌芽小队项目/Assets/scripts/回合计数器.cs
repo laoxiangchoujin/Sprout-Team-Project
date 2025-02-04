@@ -16,9 +16,11 @@ public class 回合计数器 : MonoBehaviour
     private bool bRoundAllEnemyMoved;
 
     private GameObject player;
-    private GameObject []enemy;
+	private GameObject[] enemy;
+    private GameObject[] attackTag;//远程攻击标记
 
     public float 敌人移动的时间间隔 = 0.3f;
+    public float 远程攻击的时间间隔 = 0.1f;
 
     private float 玩家未操作的时长 = 0f;
 	//private float 敌人单次移动总时长 = 1f;//相当于上边的敌人的未操作时长?不过玩家的静止循环靠按键打破，敌人的就靠经过一段时间
@@ -37,10 +39,11 @@ public class 回合计数器 : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
+        attackTag = GameObject.FindGameObjectsWithTag("AttackTag");
 
-		//bRoundPlayerCanMove = true;
-		//bRoundEnemyCanMove = false;
-		if(player == null || enemy == null)
+        //bRoundPlayerCanMove = true;
+        //bRoundEnemyCanMove = false;
+        if (player == null || enemy == null)
 		{
 			Debug.Log("没有敌人或玩家，快去加上");
 		}
@@ -62,10 +65,10 @@ public class 回合计数器 : MonoBehaviour
 
 			player = GameObject.FindGameObjectWithTag("Player");
 			enemy = GameObject.FindGameObjectsWithTag("Enemy");//更新一下
+            attackTag = GameObject.FindGameObjectsWithTag("AttackTag");
 
 
-
-			if (player != null && enemy != null && enemy.Length>0)//正常运行的情况
+            if (player != null && enemy != null && enemy.Length>0)//正常运行的情况
 			{
 				if (bPlayerMoveFirst)
 				{
@@ -93,7 +96,27 @@ public class 回合计数器 : MonoBehaviour
 
 					if (bRoundPlayerMoved && !bRoundAllEnemyMoved)//让敌人动
 					{
-						foreach (var item in enemy)
+                        foreach (var item in attackTag)
+                        {
+                            if (item == null) continue;
+
+                            //先间隔时间再动
+                            yield return new WaitForSeconds(远程攻击的时间间隔);
+
+                            if (item != null)
+                            {
+                                if (item.GetComponent<Renderer>().enabled)
+                                {
+                                    //爆炸攻击
+                                    Destroy(item.gameObject);
+                                }
+                                item.GetComponent<Renderer>().enabled = true;
+                                //item.GetComponent<Collider>().enabled = true;
+                                Debug.Log("远程攻击在中心点造成伤害");
+                            }
+                        }
+
+                        foreach (var item in enemy)
 						{
 							if (item == null) continue;
 
