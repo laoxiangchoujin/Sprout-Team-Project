@@ -6,12 +6,12 @@ public class UI对应的函数 : MonoBehaviour
 {
     public GameObject 回合计数器;
 
-    public void OnMouseEnter(GameObject ui)
+    //以下两个方法控制鼠标悬停时UI大小动态变化（结合Event Trigger组件）
+    public void OnMouseEnter(GameObject ui)//使用Pointer Enter
     {
         ui.transform.localScale = ui.transform.localScale / 0.9f;
     }
-
-    public void OnMouseExit(GameObject ui)
+    public void OnMouseExit(GameObject ui)//使用Pointer Exit
     {
         ui.transform.localScale = ui.transform.localScale * 0.9f;
     }

@@ -96,7 +96,7 @@ public class 回合计数器 : MonoBehaviour
 
 					if (bRoundPlayerMoved && !bRoundAllEnemyMoved)//让敌人动
 					{
-                        foreach (var item in attackTag)
+                        foreach (var item in attackTag)//远程攻击过程
                         {
                             if (item == null) continue;
 
@@ -108,10 +108,11 @@ public class 回合计数器 : MonoBehaviour
                                 if (item.GetComponent<Renderer>().enabled)
                                 {
                                     //爆炸攻击
+                                    yield return new WaitForSeconds(0.1f);//延迟一段时间确保击败敌人
                                     Destroy(item.gameObject);
                                 }
                                 item.GetComponent<Renderer>().enabled = true;
-                                //item.GetComponent<Collider>().enabled = true;
+                                item.GetComponent<Collider>().enabled = true;
                                 Debug.Log("远程攻击在中心点造成伤害");
                             }
                         }

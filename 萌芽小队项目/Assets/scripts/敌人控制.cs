@@ -14,6 +14,7 @@ public class 敌人控制 : MonoBehaviour
     //以下两种类型的小怪位移方式与其他小怪不同
     public bool M4;
 	public bool M6;
+	private int 远程攻击控制 = 0;//每三回合攻击一次
     public bool canUpLeft = false;
     public bool canUpRight = false;
     public bool canDownLeft = false;
@@ -98,8 +99,13 @@ public class 敌人控制 : MonoBehaviour
         {
             canUp = false; canDown = false; canLeft = false; canRight = false;
             canUpLeft = false; canUpRight = false; canDownLeft = false; canDownRight = false;
-            Instantiate(rangeAttackTag, player.transform.position, player.transform.rotation);
-            Debug.Log("生成了一个远程攻击标记");
+			if (远程攻击控制 == 0) 
+            {
+				Instantiate(rangeAttackTag, player.transform.position, player.transform.rotation);
+				Debug.Log("生成了一个远程攻击标记");
+				远程攻击控制 = 3;
+            }
+			远程攻击控制--;
             bJustMoved = true;
             moveIntervalTime = 0;
             return;
