@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class imageRaycastAlpha : MonoBehaviour,ICanvasRaycastFilter
 {
     private Image image;
+    public float alphaThreshold = 0.1f;
 
     void Awake()
     {
@@ -16,8 +17,6 @@ public class imageRaycastAlpha : MonoBehaviour,ICanvasRaycastFilter
     public bool IsRaycastLocationValid(Vector2 sp,Camera eventCamera)//检测这个屏幕坐标位置是不是valid
     {
         if (image == null) return true;
-
-        var alphaThreshold = 0.1f;
 
         //将屏幕坐标转换为图片的local坐标
         RectTransformUtility.ScreenPointToLocalPointInRectangle(image.rectTransform, sp, eventCamera, out Vector2 localPoint);//应该localPoint就是？

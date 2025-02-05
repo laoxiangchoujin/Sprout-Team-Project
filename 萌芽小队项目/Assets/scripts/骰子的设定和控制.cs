@@ -39,7 +39,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 	};
 
     //aspect aspect1 = new aspect();
-    private aspect[] sixAspects =new aspect[7];
+    public aspect[] sixAspects =new aspect[7];
 
 	public aspect nowUpAspect;
 

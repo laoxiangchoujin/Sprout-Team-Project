@@ -1,0 +1,270 @@
+Using pre-set license
+Built from '2022.3/china_unity/release' branch; Version is '2022.3.17f1c1 (a01dafa986ec) revision 10493359'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19045) 64bit CoreCountrySpecific' Language: 'zh' Physical Memory: 16021 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+D:\Unity\Unity_Editor\2022.3.17f1c1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker3
+-projectPath
+D:/Unity/Unity_Projects/Sprout Team/萌芽小队项目
+-logFile
+Logs/AssetImportWorker3.log
+-srvPort
+54043
+Successfully changed project path to: D:/Unity/Unity_Projects/Sprout Team/萌芽小队项目
+D:/Unity/Unity_Projects/Sprout Team/萌芽小队项目
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [20224] Host "[IP] 26.241.137.109 [Port] 0 [Flags] 2 [Guid] 679216380 [EditorId] 679216380 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-ITKQLNKI) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [20224] Host "[IP] 26.241.137.109 [Port] 0 [Flags] 2 [Guid] 679216380 [EditorId] 679216380 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-ITKQLNKI) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+[Physics::Module] Initialized MultithreadedJobDispatcher with 11 workers.
+Refreshing native plugins compatible for Editor in 19.22 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2022.3.17f1c1 (a01dafa986ec)
+[Subsystems] Discovering subsystems at path D:/Unity/Unity_Editor/2022.3.17f1c1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/Unity/Unity_Projects/Sprout Team/萌芽小队项目/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3050 Laptop GPU (ID=0x25a2)
+    Vendor:   NVIDIA
+    VRAM:     3964 MB
+    Driver:   32.0.15.6636
+Initialize mono
+Mono path[0] = 'D:/Unity/Unity_Editor/2022.3.17f1c1/Editor/Data/Managed'
+Mono path[1] = 'D:/Unity/Unity_Editor/2022.3.17f1c1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'D:/Unity/Unity_Editor/2022.3.17f1c1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56832
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: D:/Unity/Unity_Editor/2022.3.17f1c1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.012631 seconds.
+- Loaded All Assemblies, in  0.312 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.236 seconds
+Domain Reload Profiling: 547ms
+	BeginReloadAssembly (105ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (28ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (55ms)
+	LoadAllAssembliesAndSetupDomain (114ms)
+		LoadAssemblies (103ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (113ms)
+			TypeCache.Refresh (111ms)
+				TypeCache.ScanAssembly (99ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (236ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (188ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (7ms)
+			SetLoadedEditorAssemblies (7ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (2ms)
+			ProcessInitializeOnLoadAttributes (129ms)
+			ProcessInitializeOnLoadMethodAttributes (42ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+========================================================================
+Worker process is ready to serve import requests
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.535 seconds
+Refreshing native plugins compatible for Editor in 2.51 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.660 seconds
+Domain Reload Profiling: 1193ms
+	BeginReloadAssembly (119ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (4ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (18ms)
+	RebuildCommonClasses (29ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (35ms)
+	LoadAllAssembliesAndSetupDomain (341ms)
+		LoadAssemblies (256ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (152ms)
+			TypeCache.Refresh (136ms)
+				TypeCache.ScanAssembly (115ms)
+			ScanForSourceGeneratedMonoScriptInfo (12ms)
+			ResolveRequiredComponents (3ms)
+	FinalizeReload (660ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (541ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (4ms)
+			SetLoadedEditorAssemblies (2ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (44ms)
+			ProcessInitializeOnLoadAttributes (469ms)
+			ProcessInitializeOnLoadMethodAttributes (17ms)
+			AfterProcessingInitializeOnLoad (5ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (9ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+Refreshing native plugins compatible for Editor in 3.01 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3123 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 32 unused Assets / (29.7 KB). Loaded Objects now: 3612.
+Memory consumption went from 146.7 MB to 146.7 MB.
+Total: 3.288400 ms (FindLiveObjects: 0.273700 ms CreateObjectMapping: 0.073700 ms MarkObjects: 2.875300 ms  DeleteObjects: 0.064400 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 6d391050e5a25f67b0a2c618074f2cd9 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 73269.119025 seconds.
+  path: Assets/resources/Textures/墙壁/前墙壁 特殊01.png
+  artifactKey: Guid(0bb354a33c7b79a4693b78e0f7dabf39) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/resources/Textures/墙壁/前墙壁 特殊01.png using Guid(0bb354a33c7b79a4693b78e0f7dabf39) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2eec07e0cb8cd28959dfe22d620db37a') in 0.046463 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.043810 seconds.
+  path: Assets/resources/Textures/墙壁/前墙壁 特殊02.png
+  artifactKey: Guid(50dc8cfa7e2e15643971d810b33c822d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/resources/Textures/墙壁/前墙壁 特殊02.png using Guid(50dc8cfa7e2e15643971d810b33c822d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b1e5b517b881bc6d31e69a69dabd90e4') in 0.007771 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/resources/Textures/墙壁/墙壁 花纹01.png
+  artifactKey: Guid(800d39eff435a5742a3f28ac60e54997) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/resources/Textures/墙壁/墙壁 花纹01.png using Guid(800d39eff435a5742a3f28ac60e54997) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '332820907929e4d40f96e2cb91c0ab3e') in 0.010510 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/resources/Textures/墙壁/墙壁 花纹02.png
+  artifactKey: Guid(9fe724b5870247048819d519f0795ae3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/resources/Textures/墙壁/墙壁 花纹02.png using Guid(9fe724b5870247048819d519f0795ae3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2d3423fc3749981b50563e73a624df7b') in 0.009073 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/resources/Textures/墙壁/墙壁 花纹03.png
+  artifactKey: Guid(55d5cf0764a75a348a609e4ec46add7d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/resources/Textures/墙壁/墙壁 花纹03.png using Guid(55d5cf0764a75a348a609e4ec46add7d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd100b98982b956d5bbd8e5475476cef3') in 0.008593 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 1.433198 seconds.
+  path: Assets/resources/Textures/地板/地板02.png
+  artifactKey: Guid(59018c0cfb6e26a489b787fa48410e9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/resources/Textures/地板/地板02.png using Guid(59018c0cfb6e26a489b787fa48410e9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c244bcae7782e82ff156d31c4ba4fc57') in 0.007675 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/resources/Textures/地板/地板05.png
+  artifactKey: Guid(098e05f360335da40885fa71319ba40c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/resources/Textures/地板/地板05.png using Guid(098e05f360335da40885fa71319ba40c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a228618bd0ac52b56640854a6b02a56f') in 0.009229 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/resources/Textures/地板/地板08.png
+  artifactKey: Guid(ca2cd748a80877e4394d65b12ce0faf9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/resources/Textures/地板/地板08.png using Guid(ca2cd748a80877e4394d65b12ce0faf9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '52ae07a145512553986dff4e19ca509b') in 0.010893 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/resources/Textures/地板/地板04.png
+  artifactKey: Guid(b81baaae3041e11499d852f95beb1492) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/resources/Textures/地板/地板04.png using Guid(b81baaae3041e11499d852f95beb1492) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e9b2f31fcaa3d67e44d7234f6de64581') in 0.012833 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 3.768929 seconds.
+  path: Assets/resources/Textures/主界面/主界面 开始游戏.png
+  artifactKey: Guid(fe618517e82e1b7449c1a23c9a0c49c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/resources/Textures/主界面/主界面 开始游戏.png using Guid(fe618517e82e1b7449c1a23c9a0c49c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e1344b412d3c9bde98839d0102ed1529') in 0.019094 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/resources/Textures/主界面/主界面 退出游戏.png
+  artifactKey: Guid(3937d352b1d86564e8fe0240831c89a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/resources/Textures/主界面/主界面 退出游戏.png using Guid(3937d352b1d86564e8fe0240831c89a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4ac786dfb7f87a1ed254213ebcfa487e') in 0.012411 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: �����߳��˳���Ӧ�ó�����������ֹ I/O ������
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
