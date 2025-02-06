@@ -14,7 +14,7 @@ public class 敌人控制 : MonoBehaviour
     //以下两种类型的小怪位移方式与其他小怪不同
     public bool M4;
 	public bool M6;
-	private int 远程攻击控制 = 0;//每三回合攻击一次
+	private int 远程攻击控制 = 1;//每三回合攻击一次
     public bool canUpLeft = false;
     public bool canUpRight = false;
     public bool canDownLeft = false;
@@ -47,6 +47,9 @@ public class 敌人控制 : MonoBehaviour
 
     private GameObject player;
     public GameObject rangeAttackTag; //远程攻击标记
+    public GameObject rangeAttackTag2; //远程攻击标记
+    private GameObject attackTag;
+	private GameObject[] attackTag2;
 
     // Start is called before the first frame update
     void Start()
@@ -68,12 +71,18 @@ public class 敌人控制 : MonoBehaviour
 		dicePosY = 骰子.GetComponent<骰子的设定和控制>().slotPosY;
 
         player = GameObject.FindWithTag("Player");
+        attackTag = GameObject.FindWithTag("AttackTag");
+        attackTag2 = GameObject.FindGameObjectsWithTag("AttackTag2");
     }
 
 	// Update is called once per frame
 	void Update()
 	{
-		dicePosX = 骰子.GetComponent<骰子的设定和控制>().slotPosX;
+        player = GameObject.FindWithTag("Player");
+        attackTag = GameObject.FindWithTag("AttackTag");
+        attackTag2 = GameObject.FindGameObjectsWithTag("AttackTag2");//更新一下
+
+        dicePosX = 骰子.GetComponent<骰子的设定和控制>().slotPosX;
 		dicePosY = 骰子.GetComponent<骰子的设定和控制>().slotPosY;
 		if (true)
 		{
@@ -99,13 +108,37 @@ public class 敌人控制 : MonoBehaviour
         {
             canUp = false; canDown = false; canLeft = false; canRight = false;
             canUpLeft = false; canUpRight = false; canDownLeft = false; canDownRight = false;
-			if (远程攻击控制 == 0) 
-            {
-				Instantiate(rangeAttackTag, player.transform.position, player.transform.rotation);
-				Debug.Log("生成了一个远程攻击标记");
-				远程攻击控制 = 3;
+			Vector3 upPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z + 1);
+			Vector3 downPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z - 1);
+			Vector3 leftPosition = new Vector3(player.transform.position.x - 1, player.transform.position.y, player.transform.position.z);
+			Vector3 rightPosition = new Vector3(player.transform.position.x + 1, player.transform.position.y, player.transform.position.z);
+            switch (远程攻击控制)
+			{
+                case 1:
+                    Instantiate(rangeAttackTag, player.transform.position, player.transform.rotation);
+                    Instantiate(rangeAttackTag2, upPosition, player.transform.rotation);
+                    Instantiate(rangeAttackTag2, downPosition, player.transform.rotation);
+                    Instantiate(rangeAttackTag2, leftPosition, player.transform.rotation);
+                    Instantiate(rangeAttackTag2, rightPosition, player.transform.rotation);
+                    Debug.Log("生成了一个远程攻击标记");
+                    break;
+                case 2:
+                    attackTag.GetComponent<Renderer>().enabled = true;
+                    //attackTag.GetComponent<Collider>().enabled = true;
+                    //Debug.Log("远程攻击在中心点造成伤害");
+                    break;
+                case 3:
+                    foreach (var item in attackTag2) 
+					{
+                        item.GetComponent<Renderer>().enabled = true;
+                    }
+                    远程攻击控制 = 0;
+                    break;
+                default:
+					Debug.Log("远程攻击错误");
+                    break;
             }
-			远程攻击控制--;
+			远程攻击控制++;
             bJustMoved = true;
             moveIntervalTime = 0;
             return;

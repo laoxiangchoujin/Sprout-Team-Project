@@ -1706,7 +1706,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &254894758
 MonoBehaviour:
@@ -3504,6 +3504,7 @@ MonoBehaviour:
   "\u9AB0\u5B50": {fileID: 1038645860}
   bRoundEnemyCanMove: 0
   rangeAttackTag: {fileID: 0}
+  rangeAttackTag2: {fileID: 0}
 --- !u!136 &563121578
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4313,6 +4314,7 @@ MonoBehaviour:
   "\u9AB0\u5B50": {fileID: 1038645860}
   bRoundEnemyCanMove: 0
   rangeAttackTag: {fileID: 0}
+  rangeAttackTag2: {fileID: 0}
 --- !u!136 &635212337
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4885,6 +4887,7 @@ MonoBehaviour:
   "\u9AB0\u5B50": {fileID: 1038645860}
   bRoundEnemyCanMove: 0
   rangeAttackTag: {fileID: 0}
+  rangeAttackTag2: {fileID: 0}
 --- !u!136 &719992272
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7102,6 +7105,7 @@ MonoBehaviour:
   "\u9AB0\u5B50": {fileID: 1038645860}
   bRoundEnemyCanMove: 0
   rangeAttackTag: {fileID: 0}
+  rangeAttackTag2: {fileID: 0}
 --- !u!136 &914754898
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9220,7 +9224,7 @@ GameObject:
   - component: {fileID: 1316754148}
   - component: {fileID: 1316754147}
   m_Layer: 5
-  m_Name: "\u5546\u5E97 \u79BB\u5F00 (1)"
+  m_Name: "\u80CC\u5305 \u79BB\u5F00"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11317,7 +11321,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 95f2615d6df41eb4b9fca02c238e9705, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f9000a0300b9c434b8f840b695fce7fb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13502,6 +13506,7 @@ MonoBehaviour:
   "\u9AB0\u5B50": {fileID: 1038645860}
   bRoundEnemyCanMove: 0
   rangeAttackTag: {fileID: 3138593602151282070, guid: db129e6a49b5c6e449e47582397eca66, type: 3}
+  rangeAttackTag2: {fileID: 7143025907750907789, guid: 827d664228fbf394fac6619568b4b822, type: 3}
 --- !u!136 &1881080067
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -14011,6 +14016,7 @@ MonoBehaviour:
   "\u9AB0\u5B50": {fileID: 1038645860}
   bRoundEnemyCanMove: 0
   rangeAttackTag: {fileID: 0}
+  rangeAttackTag2: {fileID: 0}
 --- !u!136 &1971303513
 CapsuleCollider:
   m_ObjectHideFlags: 0
