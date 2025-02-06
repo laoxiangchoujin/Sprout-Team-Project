@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: "\u9AB0\u5B50\u70B9\u6570\u56FE\u96C6"
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: a0e5a32d0b95ff5418988e1ef83507b4, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 8f80ce64313c5124587fd234dbe5d3fb: 21300000
+    - d0933a2845bea4240ab095ae87dff4ab: 21300000
+    - 4c6359d83767a894abb3d8dfe26fa6c8: 21300000
+    - 83073b3bdcdac79459d15882e2c9d9b7: 21300000
+    - ba4a3afcbf69a044295af08a8e843d19: 21300000
+    - 960b9bdd9b901eb468117638fa4f7248: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 8f80ce64313c5124587fd234dbe5d3fb, type: 3}
+  - {fileID: 21300000, guid: d0933a2845bea4240ab095ae87dff4ab, type: 3}
+  - {fileID: 21300000, guid: 4c6359d83767a894abb3d8dfe26fa6c8, type: 3}
+  - {fileID: 21300000, guid: 83073b3bdcdac79459d15882e2c9d9b7, type: 3}
+  - {fileID: 21300000, guid: ba4a3afcbf69a044295af08a8e843d19, type: 3}
+  - {fileID: 21300000, guid: 960b9bdd9b901eb468117638fa4f7248, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - "\u5C40\u5185ui \u70B9\u65701"
+  - "\u5C40\u5185ui \u70B9\u65703"
+  - "\u5C40\u5185ui \u70B9\u65702"
+  - "\u5C40\u5185ui \u70B9\u65705"
+  - "\u5C40\u5185ui \u70B9\u65704"
+  - "\u5C40\u5185ui \u70B9\u65706"
+  m_RenderDataMap: {}
+  m_Tag: "\u9AB0\u5B50\u70B9\u6570\u56FE\u96C6"
+  m_IsVariant: 0

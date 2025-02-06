@@ -170,6 +170,7 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
 	{
 		//在货架中显示道具图片和描述
 		Transform 货架 = bagPage.transform.GetChild(1);
+		Transform 货物介绍父对象=货架.GetChild(6);
 		for (int i = 0; i < bagPropList.Count; i++)
 		{
 			//不止要改图片和文本，要给图片上赋的Prop也改了
@@ -178,11 +179,10 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
 
 			//货架.GetChild(i).gameObject.SetActive(true);
 			货架.GetChild(i).GetComponent<Image>().sprite = bagPropList[i].sprite;
-			//显示介绍和数量
-			货架.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = bagPropList[i].name1 + ':' + bagPropList[i].notes;
-			货架.GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>().text = bagPropList[i].num.ToString();
+			//显示介绍和数量		
+			货架.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = bagPropList[i].num.ToString();//介绍挪去别地了，数量的索引变成0了
 
-			//Debug.Log(货架.GetChild(i).GetChild(0).GetChild(0).name);
+			货物介绍父对象.GetChild(i).GetComponent<TextMeshProUGUI>().text = bagPropList[i].name1 + ':' + bagPropList[i].notes;
 		}
 		for(int i = bagPropList.Count;i < 6; i++)//没有prop的那部分架子呢
 		{
@@ -193,8 +193,9 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
 			
 			货架.GetChild(i).GetComponent<Image>().sprite = null;
 			
+			//货架.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = null;
 			货架.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = null;
-			货架.GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>().text = null;
+			货物介绍父对象.GetChild(i).GetComponent<TextMeshProUGUI>().text = null;
 		}
 	}
 
@@ -221,6 +222,11 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
 		bagPage.gameObject.SetActive(false);
 	}
 
+	//public void 背包显示介绍(GameObject 介绍)
+	//{
+	//	介绍.gameObject.SetActive(true);
+	//}
+
 
 
 
@@ -237,7 +243,7 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
 	public Image shopPage;//其实是商店的背景图
 	public List<Prop> shopPropList = new List<Prop>();
 
-	int coinAmount = 100;
+	public int coinAmount = 100;
     public void start打开商店()
 	{
 		StartCoroutine(打开商店());

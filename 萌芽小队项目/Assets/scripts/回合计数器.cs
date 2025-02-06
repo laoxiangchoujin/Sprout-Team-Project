@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class 回合计数器 : MonoBehaviour
@@ -174,23 +177,41 @@ public class 回合计数器 : MonoBehaviour
 	void 更新UI()
 	{
 		//从左1到左4，然后从右1到右4的顺序
-		var lui1 = GameObject.Find("Canvas1/左半/ui1/文本").GetComponent<TextMeshProUGUI>();
-		lui1.text = "回合：" + roundCount + '/' + "步数" + "?"
-			+ '\n' + "剩余敌人：" + enemy.Length
-			+ '\n' + "金币数目" + "?";
+		var lui1 = GameObject.Find("Canvas1/局内ui 背景/左半/ui1").transform;
+		lui1.GetChild(0).GetComponent<TextMeshProUGUI>().text = roundCount.ToString();//第一个，步数
+		lui1.GetChild(1).GetComponent<TextMeshProUGUI>().text = enemy.Length.ToString();//第二个，敌人数量
+		lui1.GetChild(2).GetComponent<TextMeshProUGUI>().text = GameObject.Find("商店和背包（脚本）").GetComponent<商店和背包>().coinAmount.ToString();//第三个，金币数量
 
-		var lui3 = GameObject.Find("Canvas1/左半/ui3");
-		lui3.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = player.GetComponent<骰子的设定和控制>().nowUpAspect.num.ToString();
-		lui3.transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = player.GetComponent<骰子的设定和控制>().nowUpAspect.up.num.ToString();
-		lui3.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = player.GetComponent<骰子的设定和控制>().nowUpAspect.down.num.ToString();
-		lui3.transform.GetChild(8).GetComponent<TextMeshProUGUI>().text = player.GetComponent<骰子的设定和控制>().nowUpAspect.left.num.ToString();
-		lui3.transform.GetChild(9).GetComponent<TextMeshProUGUI>().text = player.GetComponent<骰子的设定和控制>().nowUpAspect.right.num.ToString();
+		var lui2 = GameObject.Find("Canvas1/局内ui 背景/左半/ui2").transform;
+		lui2.GetChild(0).GetComponent<TextMeshProUGUI>().text = SceneManager.GetActiveScene().name.ToString();//第一个，场景名
+		lui2.GetChild(1).GetComponent<TextMeshProUGUI>().text = "消灭全部敌人"+"当前：（"+'?'+'/'+"?)";//第二个，当前目标
+																							 //还得记录杀了几个敌人，原先总共有几个敌人
+																							 //注意
 
-		var lui4 = GameObject.Find("Canvas1/左半/ui4/文本").GetComponent<TextMeshProUGUI>();
-		lui4.text = "点数变化：" + "0"
-			+ '\n' + "生命值：" + player.GetComponent<骰子的设定和控制>().hp
-			+ '\n' + "攻击力：" + player.GetComponent<骰子的设定和控制>().atk
-			+ '\n' + "状态buff：" + "None";
+		string path = "Assets/resources/Textures/局内ui/骰子点数图集.spriteatlas";
+		Object asset = AssetDatabase.LoadAssetAtPath(path, typeof(SpriteAtlas));
+		SpriteAtlas atlas=asset as SpriteAtlas;
+		if (atlas == null)
+		{
+			Debug.Log("atlas为null");
+		}
+		else
+		{
+			var lui3 = GameObject.Find("Canvas1/局内ui 背景/左半/ui3").transform;
+			lui3.GetChild(0).GetComponent<Image>().sprite = atlas.GetSprite("局内ui 点数" + player.GetComponent<骰子的设定和控制>().nowUpAspect.num.ToString());//中间
+			lui3.GetChild(1).GetComponent<Image>().sprite = atlas.GetSprite("局内ui 点数" + player.GetComponent<骰子的设定和控制>().nowUpAspect.up.num.ToString());//上
+			lui3.GetChild(2).GetComponent<Image>().sprite = atlas.GetSprite("局内ui 点数" + player.GetComponent<骰子的设定和控制>().nowUpAspect.down.num.ToString());//下
+			lui3.GetChild(3).GetComponent<Image>().sprite = atlas.GetSprite("局内ui 点数" + player.GetComponent<骰子的设定和控制>().nowUpAspect.left.num.ToString());//左
+			lui3.GetChild(4).GetComponent<Image>().sprite = atlas.GetSprite("局内ui 点数" + player.GetComponent<骰子的设定和控制>().nowUpAspect.right.num.ToString());//右
+			lui3.GetChild(5).GetComponent<Image>().sprite = atlas.GetSprite("局内ui 点数" + (7-player.GetComponent<骰子的设定和控制>().nowUpAspect.num).ToString());//背面
+		}
+		
+
+		var lui4 = GameObject.Find("Canvas1/局内ui 背景/左半/ui4").transform;
+		lui4.GetChild(0).GetComponent<TextMeshProUGUI>().text= player.GetComponent<骰子的设定和控制>().hp.ToString();
+		lui4.GetChild(1).GetComponent<TextMeshProUGUI>().text = player.GetComponent<骰子的设定和控制>().atk.ToString();
+		lui4.GetChild(2).GetComponent<TextMeshProUGUI>().text = "?";
+
     }
 
 	private void Update()
