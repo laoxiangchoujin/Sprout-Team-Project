@@ -38,12 +38,13 @@ public class 骰子的设定和控制 : MonoBehaviour
 		public aspect right;
 	};
 
-    //aspect aspect1 = new aspect();
-    public aspect[] sixAspects =new aspect[7];
+	//aspect aspect1 = new aspect();
+	public aspect[] sixAspects = new aspect[7];
 
 	public aspect nowUpAspect;
+	public int nowUpNumber;
 
-	public bool bRoundPlayerCanMove;
+    public bool bRoundPlayerCanMove;
 
 	public bool debugLog = false;
 
@@ -52,12 +53,14 @@ public class 骰子的设定和控制 : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-		allSlots=棋盘.GetComponent<基础棋盘>().allSlots;
+		allSlots = 棋盘.GetComponent<基础棋盘>().allSlots;
 
         initDice();
-		nowUpAspect=sixAspects[5];//暂时先让5的那面在上边
+		//nowUpAspect=sixAspects[3];//暂时先让3的那面在上边
+		nowUpNumber = Random.Range(1, 7);//随机生成初始值
+        nowUpAspect = sixAspects[nowUpNumber];
 
-		diceTransform=GameObject.Find("骰子").transform;
+        diceTransform =GameObject.Find("骰子").transform;
 
 		showOtherAspects();
 

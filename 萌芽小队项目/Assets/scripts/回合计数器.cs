@@ -20,7 +20,8 @@ public class 回合计数器 : MonoBehaviour
 
     private GameObject player;
 	private GameObject[] enemy;
-    private GameObject[] attackTag;//远程攻击标记
+    private GameObject attackTag;//远程攻击标记
+    private GameObject[] attackTag2;
 
     public float 敌人移动的时间间隔 = 0.3f;
     public float 远程攻击的时间间隔 = 0.1f;
@@ -42,7 +43,8 @@ public class 回合计数器 : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
-        attackTag = GameObject.FindGameObjectsWithTag("AttackTag");
+        attackTag = GameObject.FindWithTag("AttackTag");
+        attackTag2 = GameObject.FindGameObjectsWithTag("AttackTag2");
 
         //bRoundPlayerCanMove = true;
         //bRoundEnemyCanMove = false;
@@ -68,7 +70,8 @@ public class 回合计数器 : MonoBehaviour
 
 			player = GameObject.FindGameObjectWithTag("Player");
 			enemy = GameObject.FindGameObjectsWithTag("Enemy");//更新一下
-            attackTag = GameObject.FindGameObjectsWithTag("AttackTag");
+            attackTag = GameObject.FindWithTag("AttackTag");
+            attackTag2 = GameObject.FindGameObjectsWithTag("AttackTag2");
 
 
             if (player != null && enemy != null && enemy.Length>0)//正常运行的情况
@@ -99,26 +102,20 @@ public class 回合计数器 : MonoBehaviour
 
 					if (bRoundPlayerMoved && !bRoundAllEnemyMoved)//让敌人动
 					{
-                        foreach (var item in attackTag)//远程攻击过程
+						//远程攻击标记
+                        if (attackTag != null)
                         {
-                            if (item == null) continue;
-
-                            //先间隔时间再动
-                            yield return new WaitForSeconds(远程攻击的时间间隔);
-
-                            if (item != null)
+                            if (attackTag.GetComponent<Renderer>().enabled)
                             {
-                                if (item.GetComponent<Renderer>().enabled)
-                                {
-                                    //爆炸攻击
-                                    yield return new WaitForSeconds(0.1f);//延迟一段时间确保击败敌人
-                                    Destroy(item.gameObject);
-                                }
-                                item.GetComponent<Renderer>().enabled = true;
-                                item.GetComponent<Collider>().enabled = true;
-                                Debug.Log("远程攻击在中心点造成伤害");
+                                //爆炸攻击
+                                yield return new WaitForSeconds(0.1f);//延迟一段时间确保击败敌人
+                                Destroy(attackTag.gameObject);
                             }
+                            attackTag.GetComponent<Renderer>().enabled = true;
+                            //attackTag.GetComponent<Collider>().enabled = true;
+                            Debug.Log("远程攻击在中心点造成伤害");
                         }
+
 
                         foreach (var item in enemy)
 						{
@@ -140,9 +137,19 @@ public class 回合计数器 : MonoBehaviour
 						}
 						bRoundAllEnemyMoved = true;
 
-					}
+                    }
+                    //远程攻击标记2
+                    yield return new WaitForSeconds(0.2f);
+                    foreach (var item in attackTag2)
+                    {
+                        if (item == null) continue;
+                        if (item.GetComponent<Renderer>().enabled)
+                        {
+                            Destroy(item.gameObject);
+                        }
+                    }
 
-					if (bRoundPlayerMoved && bRoundAllEnemyMoved)//可以进行下个回合，复原变量先
+                    if (bRoundPlayerMoved && bRoundAllEnemyMoved)//可以进行下个回合，复原变量先
 					{
 						yield return new WaitForSeconds(0.05f);//延迟一段时间确保击败敌人
 						bRoundPlayerMoved = false;
