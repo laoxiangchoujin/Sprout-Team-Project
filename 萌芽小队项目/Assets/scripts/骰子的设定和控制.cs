@@ -50,6 +50,9 @@ public class 骰子的设定和控制 : MonoBehaviour
 
 	private GameObject[] enemy;
 
+	public Sprite 主角图像;
+	GameObject 图像;//其实是空物体
+
 	// Start is called before the first frame update
 	void Start()
     {
@@ -77,6 +80,13 @@ public class 骰子的设定和控制 : MonoBehaviour
 		atk = hp;
 
 		enemy = GameObject.FindGameObjectsWithTag("Enemy");
+
+		图像 = new GameObject();
+		图像.AddComponent<SpriteRenderer>();
+		图像.GetComponent<SpriteRenderer>().sprite = 主角图像;
+		图像.transform.localScale *= 0.3f;
+		图像.transform.eulerAngles += new Vector3(90, 0, 0);
+		
 	}
 
     // Update is called once per frame
@@ -99,6 +109,8 @@ public class 骰子的设定和控制 : MonoBehaviour
 			hp = nowUpAspect.num;
 			atk = hp;
 		}
+
+		图像.transform.position = new Vector3(diceTransform.position.x + new Vector3(0, 1, 0).x,1.5f, diceTransform.position.z + new Vector3(0, 1, 0).z);
     }
     void initDice()
     {
@@ -231,10 +243,11 @@ public class 骰子的设定和控制 : MonoBehaviour
                 canRight = true;
 
                 slotPosY += 1;
-				diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,
-				allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
+				StartCoroutine(骰子向上运动());
+				//diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,
+				//allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
 
-                int Num = nowUpAspect.down.num;
+				int Num = nowUpAspect.down.num;
                 nowUpAspect.up.num = nowUpAspect.num;
                 nowUpAspect.down.num = 7 - nowUpAspect.num;
                 nowUpAspect.num = Num;
@@ -253,8 +266,9 @@ public class 骰子的设定和控制 : MonoBehaviour
                 canRight = true;
 
                 slotPosY -= 1;
-				diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,
-				allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
+				StartCoroutine(骰子向下运动());
+				//diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,
+				//allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
 
                 int Num = nowUpAspect.up.num;
                 nowUpAspect.up.num = 7 - nowUpAspect.num;
@@ -275,8 +289,9 @@ public class 骰子的设定和控制 : MonoBehaviour
                 canRight = false;
 
                 slotPosX -= 1;
-				diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,
-				allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
+				StartCoroutine(骰子向左运动());
+				//diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,
+				//allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
 
                 int Num = nowUpAspect.right.num;
                 nowUpAspect.left.num = nowUpAspect.num;
@@ -297,8 +312,9 @@ public class 骰子的设定和控制 : MonoBehaviour
                 canRight = true;
 
                 slotPosX += 1;
-				diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,
-				allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
+				StartCoroutine(骰子向右运动());
+				//diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,
+				//allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
 
                 int Num = nowUpAspect.left.num;
                 nowUpAspect.left.num = 7 - nowUpAspect.num;
@@ -384,4 +400,111 @@ public class 骰子的设定和控制 : MonoBehaviour
 
 		
 	}
+
+
+	//接下来写一些让骰子运动的协程
+	//public IEnumerator 骰子向上运动()
+	//{
+	//	float animTime = 0.5f;
+
+	//	float speed = 1 / animTime;//实际速度，乘上deltatime后是每帧走的距离
+
+	//	float distance = 0;
+	//	float maxDistance = 1f;
+
+	//	while(distance < maxDistance)
+	//	{
+	//		diceTransform.Translate(new Vector3(0, 0, 1) * speed * Time.deltaTime);
+	//		distance += speed * Time.deltaTime;
+
+	//		yield return null;
+	//	}
+
+	//	yield return this;
+	//}
+	IEnumerator 骰子向上运动()
+	{
+		Vector3 startPos = transform.position;
+		Vector3 endPos = startPos + new Vector3(0, 0, 1);
+
+		//清空旋转状态（反正只是正方体，也看不出来）
+		transform.rotation = Quaternion.identity;
+		Quaternion startRot = transform.rotation;		
+		Quaternion endRot = Quaternion.Euler(90, 0, 0); // 向上
+		//Quaternion endRot = startRot * Quaternion.Euler(90, 0, 0);//quaternion.elua返回的是四元数（意思是用欧拉角生成四元数），并且，角度相加在四元数是用相乘表示
+		float t = 0;
+
+		while (t < 1)
+		{
+			t += Time.deltaTime;
+			float easeOut = 1 - Mathf.Pow(1 - t, 3);
+			transform.position = Vector3.Lerp(startPos, endPos, easeOut);
+			transform.rotation = Quaternion.Lerp(startRot, endRot, easeOut);
+			yield return null;
+		}
+	}
+	IEnumerator 骰子向下运动()
+	{
+		Vector3 startPos = transform.position;
+		Vector3 endPos = startPos + new Vector3(0, 0, -1);
+
+		//清空旋转状态（反正只是正方体，也看不出来）
+		transform.rotation = Quaternion.identity;
+		Quaternion startRot = transform.rotation;
+		Quaternion endRot = Quaternion.Euler(-90, 0, 0); // 向下
+		//Quaternion endRot = startRot * Quaternion.Euler(-90, 0, 0);//quaternion.elua返回的是四元数（意思是用欧拉角生成四元数），并且，角度相加在四元数是用相乘表示
+		float t = 0;
+
+		while (t < 1)
+		{
+			t += Time.deltaTime;
+			float easeOut = 1 - Mathf.Pow(1 - t, 3);
+			transform.position = Vector3.Lerp(startPos, endPos, easeOut);
+			transform.rotation = Quaternion.Lerp(startRot, endRot, easeOut);
+			yield return null;
+		}
+	}
+	IEnumerator 骰子向左运动()
+	{
+		Vector3 startPos = transform.position;
+		Vector3 endPos = startPos + new Vector3(-1, 0, 0);
+
+		//清空旋转状态（反正只是正方体，也看不出来）
+		transform.rotation = Quaternion.identity;
+		Quaternion startRot = transform.rotation;
+		Quaternion endRot = Quaternion.Euler(0, 0, 90); // 向左
+		//Quaternion endRot = startRot * Quaternion.Euler(0, 0, -90);//quaternion.elua返回的是四元数（意思是用欧拉角生成四元数），并且，角度相加在四元数是用相乘表示
+		float t = 0;
+
+		while (t < 1)
+		{
+			t += Time.deltaTime;
+			float easeOut = 1 - Mathf.Pow(1 - t, 3);
+			transform.position = Vector3.Lerp(startPos, endPos, easeOut);
+			transform.rotation = Quaternion.Lerp(startRot, endRot, easeOut);
+			yield return null;
+		}
+	}
+	IEnumerator 骰子向右运动()
+	{
+		Vector3 startPos = transform.position;
+		Vector3 endPos = startPos + new Vector3(1, 0, 0);
+
+		//清空旋转状态（反正只是正方体，也看不出来）
+		transform.rotation = Quaternion.identity;
+		Quaternion startRot = transform.rotation;
+		Quaternion endRot = Quaternion.Euler(0, 0, -90); // 向右
+		//Quaternion endRot = startRot * Quaternion.Euler(0, 0, 90);//quaternion.elua返回的是四元数（意思是用欧拉角生成四元数），并且，角度相加在四元数是用相乘表示
+		float t = 0;
+
+		while (t < 1)
+		{
+			t += Time.deltaTime;
+			float easeOut = 1 - Mathf.Pow(1 - t, 3);
+			transform.position = Vector3.Lerp(startPos, endPos, easeOut);
+			transform.rotation = Quaternion.Lerp(startRot, endRot, easeOut);
+			yield return null;
+		}
+	}
+
 }
