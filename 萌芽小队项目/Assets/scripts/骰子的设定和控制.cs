@@ -59,9 +59,9 @@ public class 骰子的设定和控制 : MonoBehaviour
 		allSlots = 棋盘.GetComponent<基础棋盘>().allSlots;
 
         initDice();
-		//nowUpAspect=sixAspects[3];//暂时先让3的那面在上边
-		nowUpNumber = Random.Range(1, 7);//随机生成初始值
-        nowUpAspect = sixAspects[nowUpNumber];
+		nowUpAspect = sixAspects[3];//先让某一面在上边
+		//nowUpNumber = Random.Range(1, 7);//随机生成初始值
+        //nowUpAspect = sixAspects[nowUpNumber];
 
         diceTransform =GameObject.Find("骰子").transform;
 
@@ -117,39 +117,34 @@ public class 骰子的设定和控制 : MonoBehaviour
 		for (int i = 1; i <= 6; i++) //上边只是给数组实例化了，还得给数组中的每个元素实例化
 		{
 			sixAspects[i] = new aspect();
-		}
+            sixAspects[i].num = i;
+        }
 
-		sixAspects[1].num = 1;
 		sixAspects[1].up = sixAspects[5];
 		sixAspects[1].down = sixAspects[2];
 		sixAspects[1].left = sixAspects[4];
 		sixAspects[1].right = sixAspects[3];
 
-		sixAspects[2].num = 2;
 		sixAspects[2].up = sixAspects[1];
 		sixAspects[2].down = sixAspects[6];
 		sixAspects[2].left = sixAspects[4];
 		sixAspects[2].right = sixAspects[3];
 
-		sixAspects[3].num = 3;
 		sixAspects[3].up = sixAspects[6];
 		sixAspects[3].down = sixAspects[1];
 		sixAspects[3].left = sixAspects[5];
 		sixAspects[3].right = sixAspects[2];
 
-		sixAspects[4].num = 4;
 		sixAspects[4].up = sixAspects[6];
 		sixAspects[4].down = sixAspects[1];
 		sixAspects[4].left = sixAspects[2];
 		sixAspects[4].right = sixAspects[5];
 
-		sixAspects[5].num = 5;
-		sixAspects[5].up = sixAspects[6];//上边是6的边
+		sixAspects[5].up = sixAspects[6];
 		sixAspects[5].down = sixAspects[1];
 		sixAspects[5].left = sixAspects[4];
 		sixAspects[5].right = sixAspects[3];
 
-		sixAspects[6].num = 6;
 		sixAspects[6].up = sixAspects[2];
 		sixAspects[6].down = sixAspects[5];
 		sixAspects[6].left = sixAspects[4];
@@ -349,6 +344,21 @@ public class 骰子的设定和控制 : MonoBehaviour
             {
 				if(this.atk >= enemy.hp)//战斗胜利的情况
                 {
+                    if (enemy.GetComponent<敌人控制>().M1 || enemy.GetComponent<敌人控制>().M2)
+                    {
+                        GameObject.Find("商店和背包（脚本）").GetComponent<商店和背包>().coinAmount += 1;
+                        Debug.Log("+1金币");
+                    }
+                    else if (enemy.GetComponent<敌人控制>().M3 || enemy.GetComponent<敌人控制>().M4)
+                    {
+                        GameObject.Find("商店和背包（脚本）").GetComponent<商店和背包>().coinAmount += 2;
+                        Debug.Log("+2金币");
+                    }
+                    else if (enemy.GetComponent<敌人控制>().M5 || enemy.GetComponent<敌人控制>().M6)
+                    {
+                        GameObject.Find("商店和背包（脚本）").GetComponent<商店和背包>().coinAmount += 3;
+                        Debug.Log("+3金币");
+                    }
                     Debug.Log("destroy了一个目标");
                     Destroy(enemy.gameObject);
                 }
@@ -369,6 +379,21 @@ public class 骰子的设定和控制 : MonoBehaviour
 			{
 				if (this.hp > enemy.atk) 
 				{
+                    if (enemy.GetComponent<敌人控制>().M1 || enemy.GetComponent<敌人控制>().M2)
+                    {
+                        GameObject.Find("商店和背包（脚本）").GetComponent<商店和背包>().coinAmount += 1;
+                        Debug.Log("+1金币");
+                    }
+                    else if (enemy.GetComponent<敌人控制>().M3 || enemy.GetComponent<敌人控制>().M4)
+                    {
+                        GameObject.Find("商店和背包（脚本）").GetComponent<商店和背包>().coinAmount += 2;
+                        Debug.Log("+2金币");
+                    }
+                    else if (enemy.GetComponent<敌人控制>().M5 || enemy.GetComponent<敌人控制>().M6)
+                    {
+                        GameObject.Find("商店和背包（脚本）").GetComponent<商店和背包>().coinAmount += 3;
+                        Debug.Log("+3金币");
+                    }
                     Debug.Log("被destroy了一个目标");
                     Destroy(enemy.gameObject);
                 }
