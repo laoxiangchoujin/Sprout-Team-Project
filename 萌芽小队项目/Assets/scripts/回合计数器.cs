@@ -91,7 +91,7 @@ public class 回合计数器 : MonoBehaviour
 							if (player.GetComponent<骰子的设定和控制>().bJustMoved)
 							{
 								bRoundPlayerMoved = true;
-                                yield return new WaitForSeconds(0.05f);//延迟一段时间确保击败敌人
+                                yield return new WaitForSeconds(0.3f);//延迟一段时间确保击败敌人
                                 player.GetComponent<骰子的设定和控制>().bRoundPlayerCanMove = false;
 								玩家未操作的时长 = 0;
 								break;
@@ -166,7 +166,9 @@ public class 回合计数器 : MonoBehaviour
 			{
 				GameObject.Find("Canvas2/关卡结算界面/胜利图片").GetComponent<Image>().enabled = true;
 				Debug.Log("敌人都被消灭，游戏胜利");
-				break;
+                yield return new WaitForSeconds(0.5f);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                break;
 			}
 			else
 			{
@@ -228,11 +230,21 @@ public class 回合计数器 : MonoBehaviour
         {
 			StopCoroutine(GameLoop());
             player.GetComponent<骰子的设定和控制>().bRoundPlayerCanMove = false;
-
-            GameObject.Find("Canvas2/关卡结算界面/失败图片").GetComponent<Image>().enabled = true;
-            Debug.Log("玩家失败了");
-            //break;
+            StartCoroutine(ResetGame());
         }
     }
 
+    IEnumerator ResetGame()
+    {
+        GameObject.Find("Canvas2/关卡结算界面/失败图片").GetComponent<Image>().enabled = true;
+        Debug.Log("玩家失败了");
+        yield return new WaitForSeconds(0.5f);
+        GameObject.Find("Canvas2/关卡结算界面/失败图片").GetComponent<Image>().enabled = false;
+        /*foreach (var item in enemy)
+        {
+			Destroy(item.gameObject);
+        }
+		Destroy(player.gameObject);*/
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

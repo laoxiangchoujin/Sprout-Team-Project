@@ -11,10 +11,13 @@ public class 敌人控制 : MonoBehaviour
 	public bool canLeft = true;
 	public bool canRight = true;
 
-    //以下两种类型的小怪位移方式与其他小怪不同
+    public bool M1;
+    public bool M2;
+    public bool M3;
     public bool M4;
-	public bool M6;
-	private int 远程攻击控制 = 1;//每三回合攻击一次
+    public bool M5;
+    public bool M6;
+    private int 远程攻击控制 = 1;//每三回合攻击一次
     public bool canUpLeft = false;
     public bool canUpRight = false;
     public bool canDownLeft = false;
@@ -123,7 +126,7 @@ public class 敌人控制 : MonoBehaviour
                     Debug.Log("生成了一个远程攻击标记");
                     break;
                 case 2:
-                    attackTag.GetComponent<Renderer>().enabled = true;
+                    //attackTag.GetComponent<Renderer>().enabled = true;
                     //attackTag.GetComponent<Collider>().enabled = true;
                     //Debug.Log("远程攻击在中心点造成伤害");
                     break;

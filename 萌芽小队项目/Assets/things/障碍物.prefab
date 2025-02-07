@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b95fb69911e45fb429f05fe78c7107af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 9
+  hp: 999
   slotPosX: 3
   slotPosY: 3
   "\u68CB\u76D8": {fileID: 0}

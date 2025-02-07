@@ -3489,7 +3489,11 @@ MonoBehaviour:
   canDown: 1
   canLeft: 1
   canRight: 1
+  M1: 1
+  M2: 0
+  M3: 0
   M4: 0
+  M5: 0
   M6: 0
   canUpLeft: 0
   canUpRight: 0
@@ -4299,7 +4303,11 @@ MonoBehaviour:
   canDown: 1
   canLeft: 1
   canRight: 1
+  M1: 0
+  M2: 0
+  M3: 0
   M4: 1
+  M5: 0
   M6: 0
   canUpLeft: 1
   canUpRight: 1
@@ -4419,10 +4427,6 @@ PrefabInstance:
     - target: {fileID: 236635322667351095, guid: 54142a32485493342aca3baf6bdd5ba0, type: 3}
       propertyPath: m_Name
       value: "\u9AB0\u5B50"
-      objectReference: {fileID: 0}
-    - target: {fileID: 236635322667351095, guid: 54142a32485493342aca3baf6bdd5ba0, type: 3}
-      propertyPath: m_TagString
-      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 842425860607992121, guid: 54142a32485493342aca3baf6bdd5ba0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4937,7 +4941,11 @@ MonoBehaviour:
   canDown: 1
   canLeft: 1
   canRight: 1
+  M1: 0
+  M2: 1
+  M3: 0
   M4: 0
+  M5: 0
   M6: 0
   canUpLeft: 0
   canUpRight: 0
@@ -6678,7 +6686,7 @@ Transform:
   m_GameObject: {fileID: 863725858}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268343, y: -0, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1.5, y: 0.59999996, z: 0.6000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7155,7 +7163,11 @@ MonoBehaviour:
   canDown: 1
   canLeft: 1
   canRight: 1
+  M1: 0
+  M2: 0
+  M3: 1
   M4: 0
+  M5: 0
   M6: 0
   canUpLeft: 0
   canUpRight: 0
@@ -8436,7 +8448,7 @@ Transform:
   m_GameObject: {fileID: 1123468835}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268343, y: -0, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1.5, y: 0.59999996, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10308,8 +10320,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 657.99976, y: 102.325165}
-  m_SizeDelta: {x: -1315.9999, y: 0}
+  m_AnchoredPosition: {x: 659.715, y: 98.897}
+  m_SizeDelta: {x: -1335.43, y: 57.148}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1539990432
 MonoBehaviour:
@@ -13280,7 +13292,11 @@ MonoBehaviour:
   canDown: 0
   canLeft: 0
   canRight: 0
+  M1: 0
+  M2: 0
+  M3: 0
   M4: 0
+  M5: 0
   M6: 1
   canUpLeft: 0
   canUpRight: 0
@@ -13790,7 +13806,11 @@ MonoBehaviour:
   canDown: 1
   canLeft: 1
   canRight: 1
+  M1: 0
+  M2: 0
+  M3: 0
   M4: 0
+  M5: 1
   M6: 0
   canUpLeft: 0
   canUpRight: 0
