@@ -10,7 +10,15 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
 	//需要有获取道具，使用道具两个函数
 	//获取是，在商店那点击，然后把对应的道具放入背包
 	//使用是，在背包里点击，就出发对应的函数
-	
+
+	public Sprite 面包;
+	public Sprite 炸鸡腿;
+	public Sprite 生命药水;
+	public Sprite 传送卷轴;
+	public Sprite 时间沙漏;
+	public Sprite 守护护盾;
+	public Sprite 狂暴骰子;
+	public Sprite 刮刮乐;
 
 	//所有小道具的集合list
 	public List<Prop> allPropsList = new List<Prop>();
@@ -30,17 +38,17 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
         prop1.availableTimes = 1;
         prop1.shipmentRate = 0.1f;
         prop1.notes="bread";
-        prop1.sprite = null;
+        prop1.sprite = 面包;
 		prop1.num = 1;				allPropsList.Add(prop1);
 
 		Prop prop2 = new Prop();
-		prop2.name1 = "烤鸡";
+		prop2.name1 = "炸鸡腿";
 		prop2.setUpFunction(Prop.hpPlus2);
 		prop2.price = 2;
 		prop2.availableTimes = 1;
 		prop2.shipmentRate = 0.1f;
 		prop2.notes = "好吃";
-		prop2.sprite = null;
+		prop2.sprite = 炸鸡腿;
 		prop2.num = 1;				allPropsList.Add(prop2);
 
 		Prop prop3 = new Prop();
@@ -50,7 +58,7 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
 		prop3.availableTimes = 1;
 		prop3.shipmentRate = 0.1f;
 		prop3.notes = "嗑药->爷们要战斗";
-		prop3.sprite = null;
+		prop3.sprite = 生命药水;
 		prop3.num = 1;				allPropsList.Add(prop3);
 
 		Prop prop4 = new Prop();
@@ -60,38 +68,38 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
 		prop4.availableTimes = 1;
 		prop4.shipmentRate = 0.1f;
 		prop4.notes = "可用于快速调整位置，躲避危险或接近目标";
-		prop4.sprite = null;
+		prop4.sprite = 传送卷轴;
 		prop4.num = 1;				allPropsList.Add(prop4);
 
-		Prop prop5 = new Prop();
-		prop5.name1 = "时间沙漏";
-		prop5.setUpFunction(Prop.oneMoreStep);
-		prop5.price = 30;
-		prop5.availableTimes = 2;
-		prop5.shipmentRate = 0.1f;
-		prop5.notes = "使本回合的时间暂停，玩家可以额外进行一次行动";
-		prop5.sprite = null;
-		prop5.num = 1;				allPropsList.Add(prop5);
+		//Prop prop5 = new Prop();
+		//prop5.name1 = "时间沙漏";
+		//prop5.setUpFunction(Prop.oneMoreStep);
+		//prop5.price = 30;
+		//prop5.availableTimes = 2;
+		//prop5.shipmentRate = 0.1f;
+		//prop5.notes = "使本回合的时间暂停，玩家可以额外进行一次行动";
+		//prop5.sprite = 时间沙漏;
+		//prop5.num = 1;				allPropsList.Add(prop5);
 
-		Prop prop6 = new Prop();
-		prop6.name1 = "闪电链球";
-		prop6.setUpFunction(Prop.lightningHammer);
-		prop6.price = 30;
-		prop6.availableTimes = 2;
-		prop6.shipmentRate = 0.1f;
-		prop6.notes = "遇到一堆怪的时候能够快速清理";
-		prop6.sprite = null;
-		prop6.num = 1;				allPropsList.Add(prop6);
+		//Prop prop6 = new Prop();
+		//prop6.name1 = "闪电链球";
+		//prop6.setUpFunction(Prop.lightningHammer);
+		//prop6.price = 30;
+		//prop6.availableTimes = 2;
+		//prop6.shipmentRate = 0.1f;
+		//prop6.notes = "遇到一堆怪的时候能够快速清理";
+		//prop6.sprite = null;
+		//prop6.num = 1;				allPropsList.Add(prop6);
 
-		Prop prop7 = new Prop();
-		prop7.name1 = "穿刺之矛";
-		prop7.setUpFunction(Prop.pierce);
-		prop7.price = 30;
-		prop7.availableTimes = 2;
-		prop7.shipmentRate = 0.1f;
-		prop7.notes = "遇到一排怪时使用";
-		prop7.sprite = null;
-		prop7.num = 1;				allPropsList.Add(prop7);
+		//Prop prop7 = new Prop();
+		//prop7.name1 = "穿刺之矛";
+		//prop7.setUpFunction(Prop.pierce);
+		//prop7.price = 30;
+		//prop7.availableTimes = 2;
+		//prop7.shipmentRate = 0.1f;
+		//prop7.notes = "遇到一排怪时使用";
+		//prop7.sprite = null;
+		//prop7.num = 1;				allPropsList.Add(prop7);
 
 		Prop prop8 = new Prop();
 		prop8.name1 = "守护护盾";
@@ -100,7 +108,7 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
 		prop8.availableTimes = 2;
 		prop8.shipmentRate = 0.1f;
 		prop8.notes = "在面对敌人较多或者躲避抵挡远程攻击时使用";
-		prop8.sprite = null;
+		prop8.sprite = 守护护盾;
 		prop8.num = 1;				allPropsList.Add(prop8);
 
 		Prop prop9 = new Prop();
@@ -110,7 +118,7 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
 		prop9.availableTimes = 1;
 		prop9.shipmentRate = 0.1f;
 		prop9.notes = "别惹平头哥！";
-		prop9.sprite = null;
+		prop9.sprite = 狂暴骰子;
 		prop9.num = 1;				allPropsList.Add(prop9);
 
 		//prop prop10 = new prop();
@@ -130,7 +138,7 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
 		prop11.availableTimes = 1;
 		prop11.shipmentRate = 0f;
 		prop11.notes = "-----------------------------------------------";
-		prop11.sprite = null;
+		prop11.sprite = 刮刮乐;
 		prop11.num = 1;				allPropsList.Add(prop11);
 	}
 

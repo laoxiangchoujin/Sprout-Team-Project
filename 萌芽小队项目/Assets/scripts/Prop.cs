@@ -72,11 +72,13 @@ public class Prop : MonoBehaviour
 	}
 	public static void flash()
 	{
-
+		骰子的设定和控制 player = GameObject.Find("骰子").GetComponent<骰子的设定和控制>();
+		player.StartCoroutine(player.传送卷轴());
 	}
 	public static void oneMoreStep()
 	{
-
+		骰子的设定和控制 player = GameObject.Find("骰子").GetComponent<骰子的设定和控制>();
+		player.StartCoroutine(player.时间沙漏());
 	}
 	public static void lightningHammer()
 	{
@@ -88,11 +90,13 @@ public class Prop : MonoBehaviour
 	}
 	public static void shield()
 	{
-
+		骰子的设定和控制 player = GameObject.Find("骰子").GetComponent<骰子的设定和控制>();
+		player.守护护盾();
 	}
-	public static void rage()
+	public static void rage()//狂暴骰子
 	{
-
+		骰子的设定和控制 player = GameObject.Find("骰子").GetComponent<骰子的设定和控制>();
+		player.StartCoroutine(player.狂暴骰子());
 	}
 	//public static void revive()
 	//{

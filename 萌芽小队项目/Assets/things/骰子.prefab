@@ -118,6 +118,7 @@ MonoBehaviour:
   bRoundPlayerCanMove: 0
   debugLog: 0
   "\u4E3B\u89D2\u56FE\u50CF": {fileID: 21300000, guid: f1072ef838df43f40b5a2e9d235bbdbb, type: 3}
+  "\u5B88\u62A4\u62A4\u76FE\u6A21\u578B": {fileID: 3318101963186954645, guid: 74aa9ee23fbfec2479f45048bdbf7bb4, type: 3}
 --- !u!65 &5862793470113797764
 BoxCollider:
   m_ObjectHideFlags: 0

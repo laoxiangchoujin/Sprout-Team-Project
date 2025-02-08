@@ -2059,6 +2059,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7265383f9ad3aa04dab746dffac3bead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  "\u9762\u5305": {fileID: 21300000, guid: b02b6e2056be0624fa3fb4ca1eddfcc7, type: 3}
+  "\u70B8\u9E21\u817F": {fileID: 21300000, guid: c3c483922926c274e810ad5611375428, type: 3}
+  "\u751F\u547D\u836F\u6C34": {fileID: 21300000, guid: 38ffb6ae59daa4f4084d4238746fb8ff, type: 3}
+  "\u4F20\u9001\u5377\u8F74": {fileID: 21300000, guid: a26133e6331ab3647a5632f195554b02, type: 3}
+  "\u65F6\u95F4\u6C99\u6F0F": {fileID: 21300000, guid: f0772c5c8067bda43b3a6f5e230b5095, type: 3}
+  "\u5B88\u62A4\u62A4\u76FE": {fileID: 21300000, guid: 5cb64e7e0d9cbfd4383e86d24a0e2c95, type: 3}
+  "\u72C2\u66B4\u9AB0\u5B50": {fileID: 21300000, guid: 01d3c5143c3a65e47a84242e0b7d1b2f, type: 3}
+  "\u522E\u522E\u4E50": {fileID: 21300000, guid: f1c8c07cb40990e41ba10dc7cd3a02d2, type: 3}
   allPropsList: []
   bagPage: {fileID: 242748508}
   bagPropList: []
@@ -4420,10 +4428,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -966464653498150686, guid: 54142a32485493342aca3baf6bdd5ba0, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -966464653498150686, guid: 54142a32485493342aca3baf6bdd5ba0, type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 196611610929415418, guid: 54142a32485493342aca3baf6bdd5ba0, type: 3}
       propertyPath: "\u68CB\u76D8"
       value: 
       objectReference: {fileID: 50955333}
+    - target: {fileID: 196611610929415418, guid: 54142a32485493342aca3baf6bdd5ba0, type: 3}
+      propertyPath: "\u5B88\u62A4\u62A4\u76FE\u6A21\u578B"
+      value: 
+      objectReference: {fileID: 3318101963186954645, guid: 74aa9ee23fbfec2479f45048bdbf7bb4, type: 3}
     - target: {fileID: 236635322667351095, guid: 54142a32485493342aca3baf6bdd5ba0, type: 3}
       propertyPath: m_Name
       value: "\u9AB0\u5B50"
