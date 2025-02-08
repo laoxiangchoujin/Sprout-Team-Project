@@ -91,7 +91,7 @@ public class 回合计数器 : MonoBehaviour
 							if (player.GetComponent<骰子的设定和控制>().bJustMoved)
 							{
 								bRoundPlayerMoved = true;
-                                yield return new WaitForSeconds(0.3f);//延迟一段时间确保击败敌人
+                                yield return new WaitForSeconds(0.4f);//延迟一段时间确保击败敌人
                                 player.GetComponent<骰子的设定和控制>().bRoundPlayerCanMove = false;
 								玩家未操作的时长 = 0;
 								break;

@@ -248,7 +248,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 
                 slotPosY += 1;
 				if(!isMoving)
-				StartCoroutine(骰子向上运动());
+				    StartCoroutine(骰子向上运动());
 				//diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,
 				//allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
 
@@ -272,7 +272,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 
                 slotPosY -= 1;
 				if(!isMoving)
-				StartCoroutine(骰子向下运动());
+				    StartCoroutine(骰子向下运动());
 				//diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,
 				//allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
 
@@ -296,7 +296,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 
                 slotPosX -= 1;
 				if(!isMoving)
-				StartCoroutine(骰子向左运动());
+				    StartCoroutine(骰子向左运动());
 				//diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,
 				//allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
 
@@ -320,7 +320,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 
                 slotPosX += 1;
 				if(!isMoving)
-				StartCoroutine(骰子向右运动());
+				    StartCoroutine(骰子向右运动());
 				//diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,
 				//allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
 
@@ -338,13 +338,15 @@ public class 骰子的设定和控制 : MonoBehaviour
 		}
 		
 	}
-	private void OnValidate()
+	/*private void OnValidate()
 	{
 		if (UnityEditor.EditorApplication.isPlaying)//只有在播放模式才做这个操作，要不然也会空引用
-			if (Time.time>0.01f)//不要一开始就运行，这样会找不到slotsParentTransform
-			diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,
-			allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
-	}
+			if (Time.time > 1f) ;//不要一开始就运行，这样会找不到slotsParentTransform
+			{
+				diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,
+				allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
+			}
+	}*/
 
 	private void OnCollisionEnter(Collision collision)//事实上，我更想在敌人控制的脚本写这个函数
 	{

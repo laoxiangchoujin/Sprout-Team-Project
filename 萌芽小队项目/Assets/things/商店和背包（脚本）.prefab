@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2875140614748301341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8442563689239000146}
+  - component: {fileID: 5273598163694621358}
+  m_Layer: 0
+  m_Name: "\u5546\u5E97\u548C\u80CC\u5305\uFF08\u811A\u672C\uFF09"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8442563689239000146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2875140614748301341}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 1.5, z: 3.5}
+  m_LocalScale: {x: 0.5, y: 2, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5273598163694621358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2875140614748301341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7265383f9ad3aa04dab746dffac3bead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "\u9762\u5305": {fileID: 21300000, guid: b02b6e2056be0624fa3fb4ca1eddfcc7, type: 3}
+  "\u70B8\u9E21\u817F": {fileID: 21300000, guid: c3c483922926c274e810ad5611375428, type: 3}
+  "\u751F\u547D\u836F\u6C34": {fileID: 21300000, guid: 38ffb6ae59daa4f4084d4238746fb8ff, type: 3}
+  "\u4F20\u9001\u5377\u8F74": {fileID: 21300000, guid: a26133e6331ab3647a5632f195554b02, type: 3}
+  "\u65F6\u95F4\u6C99\u6F0F": {fileID: 21300000, guid: f0772c5c8067bda43b3a6f5e230b5095, type: 3}
+  "\u5B88\u62A4\u62A4\u76FE": {fileID: 21300000, guid: 5cb64e7e0d9cbfd4383e86d24a0e2c95, type: 3}
+  "\u72C2\u66B4\u9AB0\u5B50": {fileID: 21300000, guid: 01d3c5143c3a65e47a84242e0b7d1b2f, type: 3}
+  "\u522E\u522E\u4E50": {fileID: 21300000, guid: f1c8c07cb40990e41ba10dc7cd3a02d2, type: 3}
+  allPropsList: []
+  bagPage: {fileID: 0}
+  bagPropList: []
+  shopPage: {fileID: 0}
+  shopPropList: []
+  coinAmount: 100
