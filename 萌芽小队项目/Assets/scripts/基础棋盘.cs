@@ -88,7 +88,7 @@ public class 基础棋盘 : MonoBehaviour
 				Vector3 pos = new Vector3(0.5f + i, 0.07f, 0.5f + j);
 				Vector3 rot = new Vector3(0, 0, 0);
 				Quaternion rot2 = Quaternion.Euler(rot+new Vector3(0,90*Random.Range(0,3),0));//vec3的欧拉角转为quaternion的四元数
-				allSlots[i, j] = GameObject.Instantiate(地板砖[Random.Range(0,7)], pos, rot2,slotsParentTransform) as GameObject;//在生成时直接指定父物体
+				allSlots[i, j] = GameObject.Instantiate(地板砖[Random.Range(0, 8)], pos, rot2, slotsParentTransform) as GameObject;//在生成时直接指定父物体
 				allSlots[i, j].name = (i + 1).ToString() + ',' + (j + 1).ToString();
 			}
 		}

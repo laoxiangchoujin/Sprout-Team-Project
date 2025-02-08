@@ -111,18 +111,14 @@ public class 敌人控制 : MonoBehaviour
         {
             canUp = false; canDown = false; canLeft = false; canRight = false;
             canUpLeft = false; canUpRight = false; canDownLeft = false; canDownRight = false;
-			Vector3 upPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z + 1);
-			Vector3 downPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z - 1);
-			Vector3 leftPosition = new Vector3(player.transform.position.x - 1, player.transform.position.y, player.transform.position.z);
-			Vector3 rightPosition = new Vector3(player.transform.position.x + 1, player.transform.position.y, player.transform.position.z);
             switch (远程攻击控制)
 			{
                 case 1:
-                    Instantiate(rangeAttackTag, player.transform.position, player.transform.rotation);
-                    Instantiate(rangeAttackTag2, upPosition, player.transform.rotation);
-                    Instantiate(rangeAttackTag2, downPosition, player.transform.rotation);
-                    Instantiate(rangeAttackTag2, leftPosition, player.transform.rotation);
-                    Instantiate(rangeAttackTag2, rightPosition, player.transform.rotation);
+                    Instantiate(rangeAttackTag, player.transform.position + new Vector3(0, 0.1f, 0), player.transform.rotation);
+                    Instantiate(rangeAttackTag2, player.transform.position + new Vector3(0, 0, 1), player.transform.rotation);
+                    Instantiate(rangeAttackTag2, player.transform.position + new Vector3(0, 0, -1), player.transform.rotation);
+                    Instantiate(rangeAttackTag2, player.transform.position + new Vector3(-1, 0, 0), player.transform.rotation);
+                    Instantiate(rangeAttackTag2, player.transform.position + new Vector3(1, 0, 0), player.transform.rotation);
                     Debug.Log("生成了一个远程攻击标记");
                     break;
                 case 2:

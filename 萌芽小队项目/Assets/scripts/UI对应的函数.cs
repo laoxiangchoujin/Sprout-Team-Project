@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UI对应的函数 : MonoBehaviour
 {
-    //public GameObject 回合计数器;
-    int n;
     //以下两个方法控制鼠标悬停时UI大小动态变化（结合Event Trigger组件）
     public void OnMouseEnter(GameObject ui)//使用Pointer Enter
     {
@@ -17,9 +16,14 @@ public class UI对应的函数 : MonoBehaviour
         ui.transform.localScale = ui.transform.localScale * 0.95f;
     }
 
-    public void StartGame()
+    public void EnterLevel(string sceneName)
     {
-        //点击后跳转至关卡地图选择界面
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void BackTitle()
+    {
+        SceneManager.LoadScene("Title");
     }
 
     public void ExitGame()
@@ -30,10 +34,4 @@ public class UI对应的函数 : MonoBehaviour
         Application.Quit();
 #endif
     }
-
-    /*public void 显示()
-    {
-        n = Random.Range(1, 7);
-        Debug.Log(n);
-    }*/
 }
