@@ -381,7 +381,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 				{
 					if (playerHas守护护盾)//失败但有护盾
 					{
-						GameObject shield = this.transform.GetChild(0).gameObject;
+						GameObject shield = this.transform.GetChild(6).gameObject;
 						Destroy(shield);
 
 						playerHas守护护盾 = false;
@@ -522,6 +522,9 @@ public class 骰子的设定和控制 : MonoBehaviour
 		}
 
 		isMoving= false;
+
+		diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
+
 		yield return null;
 	}
 	IEnumerator 骰子向下运动()
@@ -549,6 +552,9 @@ public class 骰子的设定和控制 : MonoBehaviour
 		}
 
 		isMoving = false;
+
+		diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
+
 		yield return null;
 	}
 	IEnumerator 骰子向左运动()
@@ -575,7 +581,11 @@ public class 骰子的设定和控制 : MonoBehaviour
 			yield return null;
 		}
 
-		isMoving=false; yield return null;
+		isMoving=false;
+
+		diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
+
+		yield return null;
 	}
 	IEnumerator 骰子向右运动()
 	{
@@ -601,6 +611,9 @@ public class 骰子的设定和控制 : MonoBehaviour
 			yield return null;
 		}
 		isMoving=false;
+
+		diceTransform.position = new Vector3(allSlots[slotPosX - 1, slotPosY - 1].transform.position.x, 0.5f,allSlots[slotPosX - 1, slotPosY - 1].transform.position.z);
+
 		yield return null;
 	}
 
@@ -784,7 +797,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 		yield return new WaitForSeconds(0.2f);
 	}
 
-	bool playerHas守护护盾 = false;
+	public bool playerHas守护护盾 = false;
 	public GameObject 守护护盾模型;
 	public void 守护护盾()
 	{
@@ -794,7 +807,7 @@ public class 骰子的设定和控制 : MonoBehaviour
 		playerHas守护护盾 = true;
 	}
 
-	bool playerHas狂暴骰子 = false;
+	public bool playerHas狂暴骰子 = false;
 	public IEnumerator 狂暴骰子()
 	{
 		playerHas狂暴骰子 = true;

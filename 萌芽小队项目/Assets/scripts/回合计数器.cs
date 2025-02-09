@@ -38,6 +38,9 @@ public class 回合计数器 : MonoBehaviour
 	private bool 回合暂停 = false;
 	public GameObject canvas1;//这个是战斗界面的canvas
 
+
+	public int maxEnemyCount = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +57,8 @@ public class 回合计数器 : MonoBehaviour
 		}
 		else
 		{
+			maxEnemyCount = enemy.Length;
+
 			StartCoroutine(GameLoop());//协程，在start中启动
 		}
 		//player.GetComponent<骰子的设定和控制>().bRoundPlayerCanMove = true;
@@ -193,7 +198,7 @@ public class 回合计数器 : MonoBehaviour
 
 		var lui2 = GameObject.Find("Canvas1/局内ui 背景/左半/ui2").transform;
 		lui2.GetChild(0).GetComponent<TextMeshProUGUI>().text = SceneManager.GetActiveScene().name.ToString();//第一个，场景名
-		lui2.GetChild(1).GetComponent<TextMeshProUGUI>().text = "消灭全部敌人"+"当前：（"+'?'+'/'+"?)";//第二个，当前目标
+		lui2.GetChild(1).GetComponent<TextMeshProUGUI>().text = "消灭全部敌人"+"当前：（" + enemy.Length.ToString() + '/'+ maxEnemyCount.ToString() + ")";//第二个，当前目标
 																							 //还得记录杀了几个敌人，原先总共有几个敌人
 																							 //注意
 
@@ -219,7 +224,13 @@ public class 回合计数器 : MonoBehaviour
 		var lui4 = GameObject.Find("Canvas1/局内ui 背景/左半/ui4").transform;
 		lui4.GetChild(0).GetComponent<TextMeshProUGUI>().text= player.GetComponent<骰子的设定和控制>().hp.ToString();
 		lui4.GetChild(1).GetComponent<TextMeshProUGUI>().text = player.GetComponent<骰子的设定和控制>().atk.ToString();
-		lui4.GetChild(2).GetComponent<TextMeshProUGUI>().text = "?";
+
+		string buffString=null;
+		if (player.GetComponent<骰子的设定和控制>().playerHas守护护盾)
+			buffString += " 守护护盾 ";
+		if (player.GetComponent<骰子的设定和控制>().playerHas狂暴骰子)
+			buffString += " 狂暴骰子 ";
+		lui4.GetChild(2).GetComponent<TextMeshProUGUI>().text = buffString;
 
     }
 

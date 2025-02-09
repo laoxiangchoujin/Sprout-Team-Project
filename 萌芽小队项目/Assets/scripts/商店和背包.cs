@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，还得做游戏中的道具界面
 {
+	//添加单例属性
+	public static 商店和背包 Instance { get; private set; }
+
 
 	//需要有获取道具，使用道具两个函数
 	//获取是，在商店那点击，然后把对应的道具放入背包
@@ -25,11 +28,31 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
     //还是需要一个start，初始化这些个小道具
     private void Start()
     {
-		initAllProps();
-
-		start打开商店();
+		if (Instance == this)
+		{
+			initAllProps();
+			start打开商店();
+		}		
     }
-    void initAllProps()
+
+	//添加awake来初始化单例
+	private void Awake()
+	{
+		//单例初始化
+		if (Instance == null)
+		{
+			Instance = this;
+			DontDestroyOnLoad(gameObject);
+		}
+		else
+		{
+			Destroy(gameObject);
+			return;
+		}
+	}
+
+
+	void initAllProps()
     {
         Prop prop1 = new Prop();
         prop1.name1 = "面包";
@@ -137,7 +160,7 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
 		prop11.price = 8;
 		prop11.availableTimes = 1;
 		prop11.shipmentRate = 0f;
-		prop11.notes = "-----------------------------------------------";
+		prop11.notes = "0.01%666金币		0.99%50金币		9%30金币		30%10金币	40%6金币		20%1金币";
 		prop11.sprite = 刮刮乐;
 		prop11.num = 1;				allPropsList.Add(prop11);
 	}
@@ -190,7 +213,7 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
 			//显示介绍和数量		
 			货架.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = bagPropList[i].num.ToString();//介绍挪去别地了，数量的索引变成0了
 
-			货物介绍父对象.GetChild(i).GetComponent<TextMeshProUGUI>().text = bagPropList[i].name1 + ':' + bagPropList[i].notes;
+			货物介绍父对象.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = bagPropList[i].name1 + ':' + bagPropList[i].notes;
 		}
 		for(int i = bagPropList.Count;i < 6; i++)//没有prop的那部分架子呢
 		{
@@ -203,7 +226,7 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
 			
 			//货架.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = null;
 			货架.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = null;
-			货物介绍父对象.GetChild(i).GetComponent<TextMeshProUGUI>().text = null;
+			货物介绍父对象.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = null;
 		}
 	}
 
@@ -271,6 +294,7 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
 	public void 刷新商店金币()
 	{
 		//金币显示
+		if(shopPage != null)
 		shopPage.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = coinAmount.ToString();
 	}
 
