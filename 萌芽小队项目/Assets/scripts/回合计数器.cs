@@ -172,7 +172,16 @@ public class 回合计数器 : MonoBehaviour
 				GameObject.Find("Canvas2/关卡结算界面/胜利图片").GetComponent<Image>().enabled = true;
 				Debug.Log("敌人都被消灭，游戏胜利");
                 yield return new WaitForSeconds(0.5f);
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                GameObject.Find("Canvas2/关卡结算界面/胜利图片").GetComponent<Image>().enabled = false;
+                int sceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+                if (sceneIndex > 10)
+                {
+                    SceneManager.LoadScene(0);
+                }
+				else
+                {
+                    SceneManager.LoadScene(sceneIndex);
+                }
                 break;
 			}
 			else
@@ -198,7 +207,7 @@ public class 回合计数器 : MonoBehaviour
 
 		var lui2 = GameObject.Find("Canvas1/局内ui 背景/左半/ui2").transform;
 		lui2.GetChild(0).GetComponent<TextMeshProUGUI>().text = SceneManager.GetActiveScene().name.ToString();//第一个，场景名
-		lui2.GetChild(1).GetComponent<TextMeshProUGUI>().text = "消灭全部敌人"+"当前：（" + enemy.Length.ToString() + '/'+ maxEnemyCount.ToString() + ")";//第二个，当前目标
+		lui2.GetChild(1).GetComponent<TextMeshProUGUI>().text = "消灭全部敌人" + '\n' + '\n' + "剩余：（" + enemy.Length.ToString() + '/' + maxEnemyCount.ToString() + ")";//第二个，当前目标
 																							 //还得记录杀了几个敌人，原先总共有几个敌人
 																							 //注意
 
@@ -251,11 +260,6 @@ public class 回合计数器 : MonoBehaviour
         Debug.Log("玩家失败了");
         yield return new WaitForSeconds(0.5f);
         GameObject.Find("Canvas2/关卡结算界面/失败图片").GetComponent<Image>().enabled = false;
-        /*foreach (var item in enemy)
-        {
-			Destroy(item.gameObject);
-        }
-		Destroy(player.gameObject);*/
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

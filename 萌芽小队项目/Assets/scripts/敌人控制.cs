@@ -17,7 +17,8 @@ public class 敌人控制 : MonoBehaviour
     public bool M4;
     public bool M5;
     public bool M6;
-    private int 远程攻击控制 = 1;//每三回合攻击一次
+    public bool boss;
+    public int 远程攻击控制 = 1;//每三回合攻击一次
     public bool canUpLeft = false;
     public bool canUpRight = false;
     public bool canDownLeft = false;
@@ -53,6 +54,7 @@ public class 敌人控制 : MonoBehaviour
     public GameObject rangeAttackTag2; //远程攻击标记
     private GameObject attackTag;
 	private GameObject[] attackTag2;
+    public GameObject minion;
 
     // Start is called before the first frame update
     void Start()
@@ -107,6 +109,88 @@ public class 敌人控制 : MonoBehaviour
 
 	void enemyMove()
 	{
+        if(boss){
+            if (远程攻击控制 == 1 && hp > 0)
+            {
+                canUp = false; canDown = false; canLeft = false; canRight = false;
+                canUpLeft = false; canUpRight = false; canDownLeft = false; canDownRight = false;
+                this.hp--;
+                this.atk--;
+                if (slotPosX > 1)
+                {
+                    if (!(allSlots[slotPosX - 1 - 1, slotPosY - 1].transform.name.Substring(0, 3) == "Obs" || allSlots[slotPosX - 1 - 1, slotPosY - 1].transform.name.Substring(0, 3) == "Ene"))
+                    {
+                        GameObject newMinion = Instantiate(minion, this.transform.position + new Vector3(-1, 0, 0), this.transform.rotation);
+                        newMinion.GetComponent<敌人控制>().slotPosX = this.slotPosX - 1;
+                        newMinion.GetComponent<敌人控制>().slotPosY = this.slotPosY;
+                        newMinion.SetActive(true);
+                        bJustMoved = true;
+                        moveIntervalTime = 0;
+                        远程攻击控制++;
+                        var HP显示 = GameObject.Find("boss/HP").transform;
+                        HP显示.GetComponent<TextMesh>().text = hp.ToString();
+                        return;
+                    }
+                }
+                if (slotPosX < 棋盘纵向数量)
+                {
+                    if (!(allSlots[slotPosX + 1 - 1, slotPosY - 1].transform.name.Substring(0, 3) == "Obs" || allSlots[slotPosX + 1 - 1, slotPosY - 1].transform.name.Substring(0, 3) == "Ene"))
+                    {
+                        GameObject newMinion = Instantiate(minion, this.transform.position + new Vector3(1, 0, 0), this.transform.rotation);
+                        newMinion.GetComponent<敌人控制>().slotPosX = this.slotPosX + 1;
+                        newMinion.GetComponent<敌人控制>().slotPosY = this.slotPosY;
+                        newMinion.SetActive(true);
+                        bJustMoved = true;
+                        moveIntervalTime = 0;
+                        远程攻击控制++;
+                        var HP显示 = GameObject.Find("boss/HP").transform;
+                        HP显示.GetComponent<TextMesh>().text = hp.ToString();
+                        return;
+                    }
+                }
+                if (slotPosY < 棋盘纵向数量)
+                {
+                    if (!(allSlots[slotPosX - 1, slotPosY + 1 - 1].transform.name.Substring(0, 3) == "Obs" || allSlots[slotPosX - 1, slotPosY + 1 - 1].transform.name.Substring(0, 3) == "Ene"))
+                    {
+                        GameObject newMinion = Instantiate(minion, this.transform.position + new Vector3(0, 0, 1), this.transform.rotation);
+                        newMinion.GetComponent<敌人控制>().slotPosX = this.slotPosX;
+                        newMinion.GetComponent<敌人控制>().slotPosY = this.slotPosY + 1;
+                        newMinion.SetActive(true);
+                        bJustMoved = true;
+                        moveIntervalTime = 0;
+                        远程攻击控制++;
+                        var HP显示 = GameObject.Find("boss/HP").transform;
+                        HP显示.GetComponent<TextMesh>().text = hp.ToString();
+                        return;
+                    }
+                }
+                if (slotPosY > 1)
+                {
+                    if (!(allSlots[slotPosX - 1, slotPosY - 1 - 1].transform.name.Substring(0, 3) == "Obs" || allSlots[slotPosX - 1, slotPosY - 1 - 1].transform.name.Substring(0, 3) == "Ene"))
+                    {
+                        GameObject newMinion = Instantiate(minion, this.transform.position + new Vector3(0, 0, -1), this.transform.rotation);
+                        newMinion.GetComponent<敌人控制>().slotPosX = this.slotPosX;
+                        newMinion.GetComponent<敌人控制>().slotPosY = this.slotPosY - 1;
+                        newMinion.SetActive(true);
+                        bJustMoved = true;
+                        moveIntervalTime = 0;
+                        远程攻击控制++;
+                        var HP显示 = GameObject.Find("boss/HP").transform;
+                        HP显示.GetComponent<TextMesh>().text = hp.ToString();
+                        return;
+                    }
+                }
+                bJustMoved = true;
+                moveIntervalTime = 0;
+                远程攻击控制++;
+                return;
+            }
+            else
+            {
+                if (远程攻击控制 == 3) 远程攻击控制 = 0;
+                远程攻击控制++;
+            }
+        }
         if (M6)
         {
             canUp = false; canDown = false; canLeft = false; canRight = false;
@@ -130,16 +214,16 @@ public class 敌人控制 : MonoBehaviour
                     foreach (var item in attackTag2) 
 					{
                         item.GetComponent<Renderer>().enabled = true;
+                        if (远程攻击控制 == 3) 远程攻击控制 = 0;
                     }
-                    远程攻击控制 = 0;
                     break;
                 default:
 					Debug.Log("远程攻击错误");
                     break;
             }
-			远程攻击控制++;
             bJustMoved = true;
             moveIntervalTime = 0;
+            远程攻击控制++;
             return;
         }
         canUp = true; canDown = true; canLeft = true; canRight = true;
@@ -189,7 +273,7 @@ public class 敌人控制 : MonoBehaviour
 
         if (slotPosX >= 1 && slotPosY >= 1 && slotPosX <= 棋盘横向数量 && slotPosY <= 棋盘纵向数量)
 		{
-            if (M4)//可斜向移动
+            if (M4 || boss)//可斜向移动
             {
                 if (dicePosY > slotPosY && slotPosY < 棋盘纵向数量 && dicePosX < slotPosX && slotPosX > 1 && canUpLeft)
                 {
