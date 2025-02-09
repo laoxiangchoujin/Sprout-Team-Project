@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，还得做游戏中的道具界面
 {
@@ -36,7 +37,7 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
     }
 
 	//添加awake来初始化单例
-	private void Awake()
+	void Awake()
 	{
 		//单例初始化
 		if (Instance == null)
@@ -49,10 +50,30 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
 			Destroy(gameObject);
 			return;
 		}
-	}
 
+        //DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
-	void initAllProps()
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+		// 每次加载新场景时调用
+		StartCoroutine(InitializeForNewScene());
+    }
+
+    IEnumerator InitializeForNewScene()
+    {
+		yield return new WaitForSeconds(0.05f);
+        //bagPage = GameObject.Find("Canvas2/背包界面").GetComponent<Image>();
+        //shopPage = GameObject.Find("Canvas2/商店界面（别打乱里面物体的顺序）").GetComponent<Image>();
+    }
+
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void initAllProps()
     {
         Prop prop1 = new Prop();
         prop1.name1 = "面包";
