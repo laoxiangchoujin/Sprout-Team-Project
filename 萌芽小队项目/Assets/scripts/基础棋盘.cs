@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class 基础棋盘 : MonoBehaviour
 {
-    public int 棋盘横向数量;
-    public float 棋盘长宽比;
+	public int 棋盘横向数量 = 8;
+	public float 棋盘长宽比 = 1f;
 
 	private int 棋盘纵向数量;// = (int)(棋盘横向数量 * 棋盘长宽比);
 	public GameObject[,] allSlots;// = new GameObject[棋盘横向数量, 棋盘纵向数量];
@@ -22,46 +22,68 @@ public class 基础棋盘 : MonoBehaviour
 	private bool bJustChanged = false;//是看是不是刚刚改变了inspector的值，不要改了值以后立马变，会卡
 
 	// Start is called before the first frame update
+	//void Start()
+	//   {
+	//	trans_plane = GameObject.Find("棋盘").transform;
+	//       updatePlane();
+
+	//	GameObject slotsParent = new GameObject("slotsParent");
+	//	slotsParentTransform=slotsParent.transform;
+
+	//	//slotsParent.transform.SetParent(trans_plane,true);
+
+	//	allSlots = new GameObject[棋盘横向数量, 棋盘纵向数量];
+
+	//	initAllSlots();//需要先创建父物体，在生成插槽，否则先生成的插槽没有父级
+	//}
+
 	void Start()
-    {
+	{
+		// 确保计算纵向数量
+		棋盘纵向数量 = Mathf.RoundToInt(棋盘横向数量 * 棋盘长宽比);
+
 		trans_plane = GameObject.Find("棋盘").transform;
-        updatePlane();
+		updatePlane();
 
 		GameObject slotsParent = new GameObject("slotsParent");
-		slotsParentTransform=slotsParent.transform;
+		slotsParentTransform = slotsParent.transform;
 
-		//slotsParent.transform.SetParent(trans_plane,true);
+		// 使用计算后的纵向数量初始化数组
+		allSlots = new GameObject[棋盘横向数量, 棋盘纵向数量];
 
-		initAllSlots();//需要先创建父物体，在生成插槽，否则先生成的插槽没有父级
+		// 添加调试日志
+		Debug.Log($"初始化数组：横向 {棋盘横向数量}，纵向 {棋盘纵向数量}");
+
+		initAllSlots();
 	}
 
-    // Update is called once per frame
-  //  void Update()
-  //  {
-  //      updatePlane();
-  //      drawAxis();
+	// Update is called once per frame
+	//  void Update()
+	//  {
+	//      updatePlane();
+	//      drawAxis();
 
-		//changeIntervalTime += Time.deltaTime;
-		//if (changeIntervalTime > 3)
-		//{
-		//	bJustChanged = false;
-		//}
-		//if (bHasChanged && !bJustChanged)
-		//{
-		//	clearAllSlots();
-		//	Debug.Log("清除并且重置了");
-		//	initAllSlots();
-		//	bHasChanged = false;
-		//}
-		////Debug.Log(changeIntervalTime);
-		////Debug.Log(bJustChanged);
-		////if (Input.GetKey(KeyCode.E))
-		////{
-		////	clearAllSlots();
-		////}
-  //  }
+	//changeIntervalTime += Time.deltaTime;
+	//if (changeIntervalTime > 3)
+	//{
+	//	bJustChanged = false;
+	//}
+	//if (bHasChanged && !bJustChanged)
+	//{
+	//	clearAllSlots();
+	//	Debug.Log("清除并且重置了");
+	//	initAllSlots();
+	//	bHasChanged = false;
+	//}
+	////Debug.Log(changeIntervalTime);
+	////Debug.Log(bJustChanged);
+	////if (Input.GetKey(KeyCode.E))
+	////{
+	////	clearAllSlots();
+	////}
+	//  }
 
-    void updatePlane()
+	void updatePlane()
     {
 		trans_plane.localScale = new Vector3(棋盘横向数量 * 0.1f, 1 * 0.1f, 棋盘横向数量 * 棋盘长宽比 * 0.1f);
 		trans_plane.position = new Vector3(棋盘横向数量 * 0.5f, 0, 棋盘横向数量 * 棋盘长宽比 * 0.5f);

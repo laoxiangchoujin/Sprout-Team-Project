@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，还得做游戏中的道具界面
 {
@@ -61,14 +62,108 @@ public class 商店和背包 : MonoBehaviour//所有道具、商店的类型，�
 		StartCoroutine(InitializeForNewScene());
     }
 
-    IEnumerator InitializeForNewScene()
-    {
-		yield return new WaitForSeconds(0.05f);
-        //bagPage = GameObject.Find("Canvas2/背包界面").GetComponent<Image>();
-        //shopPage = GameObject.Find("Canvas2/商店界面（别打乱里面物体的顺序）").GetComponent<Image>();
-    }
+	//IEnumerator InitializeForNewScene()
+	//{
+	//	yield return new WaitForSeconds(0.5f);
+	//	bagPage = transform.Find("Canvas2/背包界面").GetComponent<Image>();
+	//	shopPage = transform.Find("Canvas2/商店界面（别打乱里面物体的顺序）").GetComponent<Image>();
+	//}
 
-    void OnDestroy()
+	IEnumerator InitializeForNewScene()
+	{
+		yield return new WaitForSeconds(0.5f);
+
+		// 先找到Canvas2
+		GameObject canvas = GameObject.Find("Canvas2");
+		if (canvas != null)
+		{
+			// 获取所有子对象，包括未激活的
+			Transform bagTrans = canvas.transform.Find("背包界面");
+			Transform shopTrans = canvas.transform.Find("商店界面（别打乱里面物体的顺序）");
+
+			if (bagTrans != null && shopTrans != null)
+			{
+				bagPage = bagTrans.GetComponent<Image>();
+				shopPage = shopTrans.GetComponent<Image>();
+
+				Button button = GameObject.Find("Canvas1/局内ui 背景/右半/背包按键").GetComponent<Button>();
+				button.onClick.AddListener(()=>start打开背包());
+
+				Button buttonClose = canvas.transform.GetChild(4).GetChild(2).gameObject.GetComponent<Button>();
+				Transform bag = canvas.transform.GetChild(4);
+				buttonClose.onClick.AddListener(() => bag.gameObject.SetActive(false));
+
+				//上边六行是解决背包界面的button失效问题
+				//下边解决商店不能正常启动和关闭
+
+				try
+				{Button 商店按键= GameObject.Find("Canvas1/局内ui 背景/右半/商店").GetComponent<Button>();
+					商店按键.onClick.AddListener(() => initAllProps());
+					商店按键.onClick.AddListener(() => start打开商店());
+
+				Button 商店close = canvas.transform.GetChild(3).GetChild(0).GetComponent<Button>();
+				GameObject shop = canvas.transform.GetChild(3).gameObject;
+					商店close.onClick.AddListener(() => shop.SetActive(false));
+
+
+				//好了tmd不只是这俩按键出问题了，还有别的
+				Button 商店刷新= canvas.transform.GetChild(3).GetChild(1).GetComponent<Button>();
+					商店刷新.onClick.AddListener(() => initAllProps());
+					商店刷新.onClick.AddListener(() => 刷新商店());
+
+					Button 商店人 = canvas.transform.GetChild(3).GetChild(2).GetComponent<Button>();
+					商店人.onClick.AddListener(() => 点击老板娘());
+
+					//点击商品加入背包呢
+					Transform 货架 = canvas.transform.GetChild(3).GetChild(4);
+				Button button1= 货架.GetChild(0).GetComponent<Button>();
+					button1.onClick.AddListener(() => 购买商品(button1.GetComponent<Prop>()));
+					Button button2 = 货架.GetChild(1).GetComponent<Button>();
+					button1.onClick.AddListener(() => 购买商品(button2.GetComponent<Prop>()));
+					Button button3 = 货架.GetChild(2).GetComponent<Button>();
+					button1.onClick.AddListener(() => 购买商品(button3.GetComponent<Prop>()));
+					Button button4 = 货架.GetChild(3).GetComponent<Button>();
+					button1.onClick.AddListener(() => 购买商品(button4.GetComponent<Prop>()));
+					Button button5 = 货架.GetChild(4).GetComponent<Button>();
+					button1.onClick.AddListener(() => 购买商品(button5.GetComponent<Prop>()));
+
+
+				}
+				catch { }
+
+
+				//还要jb解决商品买了用不了的问题
+				Button button6 = bag.GetChild(2).GetChild(0).GetComponent<Button>();//背包界面的第一个货物
+				button6.onClick.AddListener(() =>使用prop(button6.GetComponent<Prop>()));
+				Button button7 = bag.GetChild(2).GetChild(1).GetComponent<Button>();
+				button7.onClick.AddListener(() => 使用prop(button7.GetComponent<Prop>()));
+				Button button8 = bag.GetChild(2).GetChild(2).GetComponent<Button>();
+				button8.onClick.AddListener(() => 使用prop(button8.GetComponent<Prop>()));
+				Button button9 = bag.GetChild(2).GetChild(3).GetComponent<Button>();
+				button9.onClick.AddListener(() => 使用prop(button9.GetComponent<Prop>()));
+				Button button10 = bag.GetChild(2).GetChild(4).GetComponent<Button>();
+				button10.onClick.AddListener(() => 使用prop(button10.GetComponent<Prop>()));
+				Button button11 = bag.GetChild(2).GetChild(5).GetComponent<Button>();
+				button11.onClick.AddListener(() => 使用prop(button11.GetComponent<Prop>()));
+
+
+
+
+				Debug.Log("成功找到并获取组件");
+			}
+			else
+			{
+				Debug.LogError("未找到UI组件");
+			}
+		}
+		else
+		{
+			Debug.LogError("未找到Canvas2");
+		}
+	}
+
+
+	void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }

@@ -1654,42 +1654,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7067738465334069220, guid: ce31a9e7bafea1343ba91761f17ee028, type: 3}
-      propertyPath: "\u5730\u677F\u7816.Array.size"
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7067738465334069220, guid: ce31a9e7bafea1343ba91761f17ee028, type: 3}
-      propertyPath: "\u5730\u677F\u7816.Array.data[0]"
-      value: 
-      objectReference: {fileID: 1293299847232744892, guid: 11855afb7c26ab942b8d095de3c00a05, type: 3}
-    - target: {fileID: 7067738465334069220, guid: ce31a9e7bafea1343ba91761f17ee028, type: 3}
-      propertyPath: "\u5730\u677F\u7816.Array.data[1]"
-      value: 
-      objectReference: {fileID: 1293299847232744892, guid: 76033ee7bf87eab40b510afa3dd27b18, type: 3}
-    - target: {fileID: 7067738465334069220, guid: ce31a9e7bafea1343ba91761f17ee028, type: 3}
-      propertyPath: "\u5730\u677F\u7816.Array.data[2]"
-      value: 
-      objectReference: {fileID: 1293299847232744892, guid: c6798f8f8bc847a478b2490612a7077e, type: 3}
-    - target: {fileID: 7067738465334069220, guid: ce31a9e7bafea1343ba91761f17ee028, type: 3}
-      propertyPath: "\u5730\u677F\u7816.Array.data[3]"
-      value: 
-      objectReference: {fileID: 1293299847232744892, guid: d0cf77e0e9f88bf44944a201bb8b20be, type: 3}
-    - target: {fileID: 7067738465334069220, guid: ce31a9e7bafea1343ba91761f17ee028, type: 3}
-      propertyPath: "\u5730\u677F\u7816.Array.data[4]"
-      value: 
-      objectReference: {fileID: 1293299847232744892, guid: 90d35e3dc85e84048a78367092cb6df1, type: 3}
-    - target: {fileID: 7067738465334069220, guid: ce31a9e7bafea1343ba91761f17ee028, type: 3}
-      propertyPath: "\u5730\u677F\u7816.Array.data[5]"
-      value: 
-      objectReference: {fileID: 1293299847232744892, guid: de459ca9161d8a04e81af211cdbcfdc5, type: 3}
-    - target: {fileID: 7067738465334069220, guid: ce31a9e7bafea1343ba91761f17ee028, type: 3}
-      propertyPath: "\u5730\u677F\u7816.Array.data[6]"
-      value: 
-      objectReference: {fileID: 1293299847232744892, guid: c58c84542325cbd4e9a0f353baf7b80e, type: 3}
-    - target: {fileID: 7067738465334069220, guid: ce31a9e7bafea1343ba91761f17ee028, type: 3}
-      propertyPath: "\u5730\u677F\u7816.Array.data[7]"
-      value: 
-      objectReference: {fileID: 1293299847232744892, guid: 5e5961dbc482db04aa779b0401516b6b, type: 3}
     - target: {fileID: 7755621889371192125, guid: ce31a9e7bafea1343ba91761f17ee028, type: 3}
       propertyPath: m_Name
       value: "\u68CB\u76D8"

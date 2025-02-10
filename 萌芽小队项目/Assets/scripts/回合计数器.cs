@@ -211,23 +211,24 @@ public class 回合计数器 : MonoBehaviour
 																							 //还得记录杀了几个敌人，原先总共有几个敌人
 																							 //注意
 
-		string path = "Assets/resources/Textures/局内ui/骰子点数图集.spriteatlas";
-		Object asset = AssetDatabase.LoadAssetAtPath(path, typeof(SpriteAtlas));
-		SpriteAtlas atlas=asset as SpriteAtlas;
-		if (atlas == null)
-		{
-			Debug.Log("atlas为null");
-		}
-		else
-		{
+		string path = "Textures/局内ui/局内ui 点数/局内ui 点数";
+		//Object asset = Resources.Load(path, typeof(SpriteAtlas));
+		//SpriteAtlas atlas=asset as SpriteAtlas;
+		//if (atlas == null)
+		//{
+		//	Debug.Log("atlas为null");
+		//}
+		//else
+		//{
 			var lui3 = GameObject.Find("Canvas1/局内ui 背景/左半/ui3").transform;
-			lui3.GetChild(0).GetComponent<Image>().sprite = atlas.GetSprite("局内ui 点数" + player.GetComponent<骰子的设定和控制>().nowUpAspect.num.ToString());//中间
-			lui3.GetChild(1).GetComponent<Image>().sprite = atlas.GetSprite("局内ui 点数" + player.GetComponent<骰子的设定和控制>().nowUpAspect.up.num.ToString());//上
-			lui3.GetChild(2).GetComponent<Image>().sprite = atlas.GetSprite("局内ui 点数" + player.GetComponent<骰子的设定和控制>().nowUpAspect.down.num.ToString());//下
-			lui3.GetChild(3).GetComponent<Image>().sprite = atlas.GetSprite("局内ui 点数" + player.GetComponent<骰子的设定和控制>().nowUpAspect.left.num.ToString());//左
-			lui3.GetChild(4).GetComponent<Image>().sprite = atlas.GetSprite("局内ui 点数" + player.GetComponent<骰子的设定和控制>().nowUpAspect.right.num.ToString());//右
-			lui3.GetChild(5).GetComponent<Image>().sprite = atlas.GetSprite("局内ui 点数" + (7-player.GetComponent<骰子的设定和控制>().nowUpAspect.num).ToString());//背面
-		}
+		lui3.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(path + player.GetComponent<骰子的设定和控制>().nowUpAspect.num.ToString());
+				//atlas.GetSprite("局内ui 点数" + player.GetComponent<骰子的设定和控制>().nowUpAspect.num.ToString());//中间
+			lui3.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>(path + player.GetComponent<骰子的设定和控制>().nowUpAspect.up.num.ToString());//上
+			lui3.GetChild(2).GetComponent<Image>().sprite = Resources.Load<Sprite>(path + player.GetComponent<骰子的设定和控制>().nowUpAspect.down.num.ToString());//下
+			lui3.GetChild(3).GetComponent<Image>().sprite = Resources.Load<Sprite>(path + player.GetComponent<骰子的设定和控制>().nowUpAspect.left.num.ToString());//左
+			lui3.GetChild(4).GetComponent<Image>().sprite = Resources.Load<Sprite>(path + player.GetComponent<骰子的设定和控制>().nowUpAspect.right.num.ToString());//右
+			lui3.GetChild(5).GetComponent<Image>().sprite = Resources.Load<Sprite>(path+ (7-player.GetComponent<骰子的设定和控制>().nowUpAspect.num).ToString());//背面
+		//}
 		
 
 		var lui4 = GameObject.Find("Canvas1/局内ui 背景/左半/ui4").transform;
